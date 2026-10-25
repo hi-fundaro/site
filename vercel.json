@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/api/early-access", "destination": "https://fndr.8nomads.com/api/early-access" }
+  ]
+}
