@@ -54,15 +54,21 @@
   // ---------- hero smoke and house
   var smoke = [], house = [], content = [];
   var DRIFT = { desktop: [86, 69, -69, -104], phone: [105, 84, -84, -126] };
+  // with scroll-driven animations (v3.css) the browser moves the hero layers itself; this only sets each smoke's drift
+  var cssScroll = window.CSS && CSS.supports && CSS.supports("animation-timeline: scroll()");
   function heroInit() {
     var hero = document.getElementById("hero"); if (!hero) return;
     smoke = vis(hero.querySelectorAll('[data-framer-name="Hero Smoke Image"]'));
-    smoke.forEach(function (el) {
-      if (!el.dataset.fdBase) el.dataset.fdBase = el.style.transform && el.style.transform !== "none" ? el.style.transform : "none";
+    var d = DRIFT[phone.matches ? "phone" : "desktop"];
+    smoke.forEach(function (el, i) {
+      // "none" cannot be combined with another transform function: use the identity instead
+      if (!el.dataset.fdBase) el.dataset.fdBase = el.style.transform && el.style.transform !== "none" ? el.style.transform : "translate(0)";
       el.style.setProperty("--fd-smoke-base", el.dataset.fdBase);
+      el.style.setProperty("--fd-smoke-d", d[i % d.length] + "px");
     });
     house = vis(hero.querySelectorAll('[data-framer-name="Home Image"]'));
     content = vis(hero.querySelectorAll('[data-framer-name="Content Wrapper"]'));
+    if (cssScroll) smoke = house = content = [];
   }
   // style writes only when the value changed (a write with the same value still costs a style pass)
   function setVar(el, name, value) { if (el.__fd === undefined) el.__fd = {}; if (el.__fd[name] !== value) { el.__fd[name] = value; el.style.setProperty(name, value); } }

@@ -78,13 +78,16 @@
     if (reduce) { setTimeout(showCue, 1200); return; }                 // no motion: just show the cue
     if (userMoved || (window.scrollY || 0) > 2 || document.hidden) return;
     measureStop();
-    var dist = yStop, t0 = null;
+    var dist = yStop, t0 = null, setY = null;
     // the stop point is measured once above; the frames only scroll (no layout reads while moving)
     function step(t) {
+      // the page moved by something else (scrollbar drag, momentum, anchor link): the visitor has taken over
+      if (setY !== null && Math.abs((window.scrollY || 0) - setY) > 2) { cancelAuto(); return; }
       if (t0 === null) t0 = t;
       var k = Math.min(1, (t - t0) / AUTO_DUR);
       k = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;   // ease in-out (cubic): soft start and landing
       window.scrollTo(0, dist * k);
+      setY = window.scrollY || 0;
       if (k < 1) auto = requestAnimationFrame(step);
       else { auto = null; setTimeout(showCue, CUE_DELAY); }
     }

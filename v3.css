@@ -12,10 +12,39 @@
 main#hero { filter: none !important; -webkit-filter: none !important; }
 main#hero [data-framer-name="Content Wrapper"] { will-change: transform, opacity; }
 
-/* ---- hero smoke and house: moved by fd-fx.js through CSS variables, so their own transforms stay intact */
-main#hero [data-framer-name="Hero Smoke Image"] { transform: var(--fd-smoke-base, none) translateX(var(--fd-smoke-x, 0px)) !important; }
-main#hero [data-framer-name="Home Image"] { transform: translateY(var(--fd-para-y, 0px)) !important; }
-main#hero [data-framer-name="Content Wrapper"] { transform: translateY(var(--fd-cw-y, 0px)) scale(var(--fd-cw-s, 1)) !important; opacity: var(--fd-cw-o, 1) !important; }
+/* ---- hero smoke, house and text: driven by the scroll position itself where the browser supports scroll-driven
+   animations, so they run on the compositor in step with the scroll (no JavaScript per frame, no lag on phones).
+   Same motion as before: smoke drifts over the first 450px (ease-out cubic), the house moves at 0.5x (phones 0.7x),
+   the text shrinks to .86 (phones .829) over 550px (420px) and sinks at a tenth of the scroll.
+   The individual translate/scale properties leave each element's own transform intact. */
+@supports (animation-timeline: scroll()) {
+  main#hero [data-framer-name="Hero Smoke Image"] {
+    transform: var(--fd-smoke-base, none) !important;
+    animation: fd-smoke 1s cubic-bezier(.33, 1, .68, 1) both; animation-timeline: scroll(root block); animation-range: 0px 450px; }
+  main#hero [data-framer-name="Home Image"] {
+    transform: none !important;
+    animation: fd-house 1s linear both; animation-timeline: scroll(root block); animation-range: 0px 4000px; }
+  main#hero [data-framer-name="Content Wrapper"] {
+    transform: none !important;
+    animation: fd-cw-shrink 1s cubic-bezier(.25, .4, .65, .95) both, fd-cw-sink 1s linear both;
+    animation-timeline: scroll(root block), scroll(root block); animation-range: 0px 550px, 0px 4000px; }
+  @keyframes fd-smoke { from { translate: 0 0; } to { translate: var(--fd-smoke-d, 0px) 0; } }
+  @keyframes fd-house { from { translate: 0 0; } to { translate: 0 -2000px; } }
+  @keyframes fd-cw-shrink { from { scale: 1; opacity: 1; } to { scale: .86; opacity: .72; } }
+  @keyframes fd-cw-sink { from { translate: 0 0; } to { translate: 0 400px; } }
+  @media (max-width: 809px) {
+    main#hero [data-framer-name="Home Image"] { animation-name: fd-house-phone; }
+    main#hero [data-framer-name="Content Wrapper"] { animation-name: fd-cw-shrink-phone, fd-cw-sink; animation-range: 0px 420px, 0px 4000px; }
+    @keyframes fd-house-phone { from { translate: 0 0; } to { translate: 0 -2800px; } }
+    @keyframes fd-cw-shrink-phone { from { scale: 1; opacity: 1; } to { scale: .829; opacity: .658; } }
+  }
+}
+/* older browsers: fd-fx.js moves them through CSS variables on each scroll frame */
+@supports not (animation-timeline: scroll()) {
+  main#hero [data-framer-name="Hero Smoke Image"] { transform: var(--fd-smoke-base, none) translateX(var(--fd-smoke-x, 0px)) !important; }
+  main#hero [data-framer-name="Home Image"] { transform: translateY(var(--fd-para-y, 0px)) !important; }
+  main#hero [data-framer-name="Content Wrapper"] { transform: translateY(var(--fd-cw-y, 0px)) scale(var(--fd-cw-s, 1)) !important; opacity: var(--fd-cw-o, 1) !important; }
+}
 
 /* ---- the rolling "Acquire · Renovate · Sell" line (Framer's ticker ran in JavaScript; phones keep it hidden) */
 @media (min-width: 810px) {
