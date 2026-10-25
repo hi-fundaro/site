@@ -52,19 +52,14 @@
 .wl-v3 .wl-v3__of { font-size: 40px; font-variant-numeric: oldstyle-nums; }
 .wl-v3 .wl-v3__left { margin-top: 26px; }
 .wl-v3 .wl-v3__caption { margin-top: 14px; font-size: 12px; opacity: .78; }
-.wl-v3 .wl-v3__when { margin-top: 48px; }
-.wl-v3__cells { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 16px; border: 1px solid rgba(240, 234, 229, .2); border-radius: 2px; }
-.wl-v3__cells > div { padding: 22px 6px 18px; text-align: center; }
-.wl-v3__cells > div + div { border-left: 1px solid rgba(240, 234, 229, .2); }
-.wl-v3__cells b { display: block; font-family: var(--wl-display); font-weight: 400; font-size: 46px; line-height: 1; }
-.wl-v3__cells span { display: block; margin-top: 12px; font-size: 10px; letter-spacing: .3em; text-transform: uppercase; }
+/* desktop and tablet: with the countdown gone, the count and the lit house stay in view beside the longer text column */
+@media (min-width: 810px) { .wl-v3 .wl-v3__grid2 > .wl-v3__col + .wl-v3__col { align-self: start; position: sticky; top: 112px; } }
 .wl-v3 .wl-v3__legal { grid-column: 1 / -1; margin-top: 44px; padding-top: 24px; border-top: 1px solid rgba(240, 234, 229, .14); font-size: 13px; line-height: 1.65; color: var(--wl-cream); }
 .wl-v3 .wl-v3__note { color: var(--wl-cream); }
 @media (max-width: 1199px) {
   .wl-v3 .wl-v3__grid2 { column-gap: 56px; grid-template-columns: minmax(0, 1fr) minmax(0, 440px); }
   .wl-v3 .wl-v3__h { font-size: 60px; }
   .wl-v3 .wl-v3__big { font-size: 124px; }
-  .wl-v3__cells b { font-size: 38px; }
 }
 @media (max-width: 809px) {
   .wl-v3__wrap { padding: 0 20px; }
@@ -84,14 +79,9 @@
   .wl-v3 .wl-v3__prosp { order: 5; margin-top: 30px; }
   .wl-v3 .wl-v3__form, .wl-v3 .wl-v3__done { order: 6; margin-top: 26px; max-width: none; }
   .wl-v3 .wl-v3__legal { order: 7; margin-top: 26px; padding-top: 20px; }
-  .wl-v3 .wl-v3__timer { order: 8; }
   .wl-v3 .wl-v3__big { font-size: clamp(88px, 28vw, 120px); }
   .wl-v3 .wl-v3__of { font-size: 30px; }
   .wl-v3 .wl-v3__left { margin-top: 18px; }
-  .wl-v3 .wl-v3__when { margin-top: 36px; }
-  .wl-v3__cells > div { padding: 16px 2px 13px; }
-  .wl-v3__cells b { font-size: clamp(28px, 9vw, 36px); }
-  .wl-v3__cells span { font-size: 8.5px; letter-spacing: .2em; margin-top: 9px; }
 }
 .wl-v3__consent { display: flex; align-items: flex-start; gap: 12px; margin-top: 14px; cursor: pointer; font-size: 14px; line-height: 1.5; max-width: 505px; }
 .wl-v3__consent input { appearance: none; -webkit-appearance: none; flex: none; width: 22px; height: 22px; margin: 1px 0 0; border: 1.5px solid var(--wl-cream); border-radius: 3px; background: var(--wl-cream); cursor: pointer; display: grid; place-content: center; }

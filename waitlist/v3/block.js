@@ -4,7 +4,7 @@
 (() => {
   const V = "v3", P = "wl-v3";
   const CFG = window.FD_WL_V3_CONFIG || {};
-  const API = (window.FD_API_BASE || "") + "/api/early-access", SIZE = 500, POLL_MS = 4000, COUNTDOWN_KEY = "DATE_GROUP1";
+  const API = (window.FD_API_BASE || "") + "/api/early-access", SIZE = 500, POLL_MS = 4000;
   const LABEL = "Fundaro bonds: get your key";
   const GIFT = CFG.GIFT_ENABLED === true;
   const state = { total: null, g: 0, mode: 0, lit: -1 };
@@ -16,17 +16,6 @@
   // a config value, or its visible [PLACEHOLDER] until it is filled in
   const val = (k) => (isSet(CFG[k]) ? String(CFG[k]).trim() : "[" + k + "]");
   const num = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  const pad = (n) => (n < 10 ? "0" : "") + n;
-  const MONTHS = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
-  const ISO = /^(\d{4})-(\d{1,2})-(\d{1,2})$/, LONG = /^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/;
-  // "26 October 2026" or "2026-10-26" -> [year, month, day]; anything else (a placeholder) -> null
-  const ymd = (v, s = String(v || "").trim(), a = ISO.exec(s), b = LONG.exec(s), mi = b ? MONTHS.indexOf(b[2].toLowerCase()) : -1) =>
-    a ? [+a[1], +a[2], +a[3]] : (b && mi >= 0 ? [+b[3], mi + 1, +b[1]] : null);
-  // 08:00 Europe/Riga on that day as a UTC timestamp (UTC+2 in winter, UTC+3 in summer)
-  const RIGA = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Riga", hourCycle: "h23", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
-  const rigaParts = (t) => Object.fromEntries(RIGA.formatToParts(new Date(t)).filter((x) => x.type !== "literal").map((x) => [x.type, +x.value]));
-  const offsetAt = (t, p = rigaParts(t)) => Date.UTC(p.year, p.month - 1, p.day, p.hour, p.minute) - t;
-  const rigaNine = (v, d = ymd(v), g = d ? Date.UTC(d[0], d[1] - 1, d[2], 8) : 0) => (d ? g - offsetAt(g - offsetAt(g)) : null);
   const prospectusLink = (u = val("PROSPECTUS_URL")) => /^https?:\/\//i.test(u)
     ? '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(u.replace(/^https?:\/\/(www\.)?/i, "").split("/")[0]) + "</a>"
     : '<a class="is-placeholder">' + esc(u) + "</a>";
@@ -99,7 +88,6 @@
       '<div class="' + P + '__prev" hidden><p class="' + P + '__eyebrow" data-prev-label></p><div data-prev-svg></div></div>' +
       '<div class="' + P + '__facade" aria-hidden="true"></div>' +
       '<p class="' + P + '__caption" data-wl="caption"></p></div>' +
-      '<div class="' + P + '__timer"><p class="' + P + "__when " + P + '__eyebrow"><span data-wl="when"></span> · ' + esc(val("DATE_GROUP1")) + "</p>" + CELLS + "</div>" +
     "</div>" +
     '<p class="' + P + '__legal">' + BOTTOM_LEGAL + "</p>" +
     "</div></div>";
@@ -115,18 +103,6 @@
     '<p class="' + P + '__note">' + note + "</p></form>" +
     '<div class="' + P + '__done" role="status" aria-live="polite"><p class="' + P + '__done-title"></p><p class="' + P + '__done-text"></p>' +
       '<button type="button" class="' + P + '__again">Add another email</button></div>';
-  const CELLS = '<div class="' + P + '__cells" role="timer"><div><b data-t="d">--</b><span>Days</span></div><div><b data-t="h">--</b><span>Hours</span></div>' +
-    '<div><b data-t="m">--</b><span>Minutes</span></div><div><b data-t="s">--</b><span>Seconds</span></div></div>';
-
-  // ---------- countdown: "--" until the date in config.js is filled in
-  const parts = (target, s = Math.floor(Math.max(0, target - Date.now()) / 1000)) =>
-    ({ d: Math.floor(s / 86400), h: Math.floor((s % 86400) / 3600), m: Math.floor((s % 3600) / 60), s: s % 60 });
-  const tick = () => {
-    if (el) {
-      const target = rigaNine(val(COUNTDOWN_KEY)), c = target === null ? null : parts(target);
-      ["d", "h", "m", "s"].forEach((k) => { el.querySelector('[data-t="' + k + '"]').textContent = c ? pad(c[k]) : "--"; });
-    }
-  };
 
   // ---------- signup (same endpoint and rules as the default block)
   const ERR = { invalid_email: "Please check the email address.", consent_required: "Please tick the box to agree to receive emails about this offer.", rate_limited: "Too many sign-ups from this connection. Please try again in a few minutes." };
@@ -229,7 +205,6 @@
       setText('[data-wl="n"]', String(mine ? mine.position : n));
       setText('[data-wl="left"]', mine ? "Your key · Group " + g : "Group " + g + " · " + handed);
       if (mine) { const mk = el.querySelector("[data-mykey]"); mk.textContent = handed; mk.hidden = false; }
-      setText('[data-wl="when"]', "Group " + g + " keys in");
       if (state.g !== g) el.querySelector("[data-lead]").innerHTML = lead(g);
       drawFacade(g, n);
       setText('[data-wl="caption"]', g === 1
@@ -382,8 +357,7 @@
     let tries = 0;
     const wait = () => {
       if (host()) {
-        mount(); render(); tick();
-        setInterval(() => { if (!document.hidden) tick(); }, 1000);
+        mount(); render();
         new MutationObserver(() => { if (!el.isConnected) setTimeout(mount, 200); })
           .observe(document.getElementById("main") || document.body, { childList: true, subtree: true });
         startLive();

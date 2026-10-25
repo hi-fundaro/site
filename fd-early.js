@@ -35,9 +35,9 @@
   window.FD_EA_ACCESS_AT = rigaNine(CONFIG.DATE_GROUP1);
   function loadPreview(v) {
     var base = (typeof window.FD_SITE_BASE === "string" ? window.FD_SITE_BASE : "/v2") + "/waitlist/" + v + "/", css = document.createElement("link"), cfg = document.createElement("script");
-    css.rel = "stylesheet"; css.href = base + "block.css?r=17"; document.head.appendChild(css);
-    cfg.src = base + "config.js?r=17";
-    cfg.onload = function () { var js = document.createElement("script"); js.src = base + "block.js?r=17"; document.head.appendChild(js); };
+    css.rel = "stylesheet"; css.href = base + "block.css?r=18"; document.head.appendChild(css);
+    cfg.src = base + "config.js?r=18";
+    cfg.onload = function () { var js = document.createElement("script"); js.src = base + "block.js?r=18"; document.head.appendChild(js); };
     document.head.appendChild(cfg);
   }
   var state = { count: null, total: null, next: null }, prevN = null, blocks = [], visible = new Set(), timer = null, inflight = false;
