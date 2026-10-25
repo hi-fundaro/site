@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script data-fndr="static-host">
+(function(){
+  window.FD_API_BASE="https://fndr.8nomads.com";window.FD_VIDEO_BASE="https://fndr.8nomads.com/v2/assets";window.FD_SITE_BASE="";
+  // Framer CMS byte ranges on a plain file host: fetch the whole file once, hand back the slices asked for
+  var f=window.fetch,cache={};
+  window.fetch=function(u,o){
+    try{
+      var url=new URL(typeof u==="string"?u:u.url,location.href),ranges=url.searchParams.get("range");
+      if(ranges&&/\.framercms$/.test(url.pathname)){
+        var key=url.origin+url.pathname;
+        var p=cache[key]||(cache[key]=f(key).then(function(r){if(!r.ok)throw new Error("cms "+r.status);return r.arrayBuffer()}));
+        return p.then(function(buf){
+          var b=new Uint8Array(buf),parts=[],n=0;
+          ranges.split(",").forEach(function(r){var m=/^(\d+)-(\d+)$/.exec(r);if(!m)throw new Error("bad range");var s=b.subarray(+m[1],+m[2]+1);parts.push(s);n+=s.length});
+          var out=new Uint8Array(n),off=0;parts.forEach(function(s){out.set(s,off);off+=s.length});
+          return new Response(out,{status:200,headers:{"content-type":"application/octet-stream"}})
+        })
+      }
+    }catch(e){}
+    return f.apply(this,arguments)
+  };
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Journal - Costa del Sol market notes | Fundaro</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="64x64" href="/assets/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#271732">
+<meta name="description" content="Market analysis and property intelligence from the Costa del Sol, written by the people renovating buildings in Malaga.">
+<!-- Social graph. Absolute URLs: crawlers do not resolve relative paths.
+     Change the host here if the site is served from anywhere else. -->
+<link rel="canonical" href="https://www.fundaro.capital/journal/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fundaro">
+<meta property="og:url" content="https://www.fundaro.capital/journal/">
+<meta property="og:title" content="Journal - Costa del Sol market notes | Fundaro">
+<meta property="og:description" content="Market analysis and property intelligence from the Costa del Sol, written by the people renovating buildings in Malaga.">
+<meta property="og:image" content="https://www.fundaro.capital/assets/masthead-journal.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1672">
+<meta property="og:image:height" content="941">
+<meta property="og:image:alt" content="Malaga and the Costa del Sol from the air">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Journal - Costa del Sol market notes | Fundaro">
+<meta name="twitter:description" content="Market analysis and property intelligence from the Costa del Sol, written by the people renovating buildings in Malaga.">
+<meta name="twitter:image" content="https://www.fundaro.capital/assets/masthead-journal.jpg">
+<meta name="twitter:image:alt" content="Malaga and the Costa del Sol from the air">
+<!-- The two faces every page opens with. Same origin, but a font preload
+     still needs crossorigin or it is fetched twice. -->
+<link rel="preload" as="font" type="font/woff2" crossorigin
+      href="../assets/fonts/playfair-display-latin.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin
+      href="../assets/fonts/optima-nova-regular.woff2">
+<link rel="stylesheet" href="../styles.css?v=brand1">
+<script>
+/* Opt in to the reveal animations only where they can run and are wanted. */
+if ('IntersectionObserver' in window &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.documentElement.className += ' js';
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Blog",
+      "@id": "https://www.fundaro.capital/journal/#blog",
+      "url": "https://www.fundaro.capital/journal/",
+      "name": "Fundaro Journal",
+      "description": "Market analysis and property intelligence from the Costa del Sol, written by the people renovating buildings in Malaga.",
+      "inLanguage": "en-GB",
+      "publisher": {
+        "@id": "https://www.fundaro.capital/#organization"
+      },
+      "blogPost": [
+        {
+          "@type": "BlogPosting",
+          "@id": "https://www.fundaro.capital/journal/four-seasons-marbella/#article",
+          "url": "https://www.fundaro.capital/journal/four-seasons-marbella/",
+          "headline": "Four Seasons Is Coming to Marbella, and Everything Changes",
+          "datePublished": "2026-04-29",
+          "image": "https://www.fundaro.capital/assets/masthead-four-seasons.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": "Fundaro Editorial",
+            "url": "https://www.fundaro.capital/"
+          },
+          "publisher": {
+            "@id": "https://www.fundaro.capital/#organization"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "@id": "https://www.fundaro.capital/journal/marbella-record-prices/#article",
+          "url": "https://www.fundaro.capital/journal/marbella-record-prices/",
+          "headline": "Marbella's Record Prices, and the Logic Behind Them",
+          "datePublished": "2026-03-01",
+          "image": "https://www.fundaro.capital/assets/masthead-record-prices.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": "Fundaro Editorial",
+            "url": "https://www.fundaro.capital/"
+          },
+          "publisher": {
+            "@id": "https://www.fundaro.capital/#organization"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "@id": "https://www.fundaro.capital/journal/golden-visa-gone/#article",
+          "url": "https://www.fundaro.capital/journal/golden-visa-gone/",
+          "headline": "The Golden Visa Is Gone. Why International Buyers Are Still Here.",
+          "datePublished": "2026-05-01",
+          "image": "https://www.fundaro.capital/assets/masthead-golden-visa.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": "Fundaro Editorial",
+            "url": "https://www.fundaro.capital/"
+          },
+          "publisher": {
+            "@id": "https://www.fundaro.capital/#organization"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.fundaro.capital/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Journal",
+          "item": "https://www.fundaro.capital/journal/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead masthead--image masthead--index">
+  <div class="masthead__bg">
+    <img fetchpriority="high" decoding="async" src="../assets/masthead-journal.jpg" alt="M&aacute;laga and the Costa del Sol from the air">
+  </div>
+
+  <div class="wrap">
+    <nav class="nav" aria-label="Primary">
+      <a class="nav__logo" href="/"><img src="../assets/logo.svg" alt="Fundaro"></a>
+      <div class="nav__links">
+        <a href="/#services">What we do</a>
+        <a href="/#featured">Where we work</a>
+        <a href="/#our-impact">The company</a>
+        <a href="/#team">Team</a>
+        <a href="index.html">Journal</a>
+      </div>
+      <a class="btn btn--ghost" href="#updates">Stay in touch</a>
+    </nav>
+
+    <div class="masthead__body">
+      <p class="tag section__eyebrow" data-anim>Fundaro Journal &middot; Spring 2026</p>
+      <h1 class="d1" data-anim="lines">Intelligence from<br>the Costa del Sol<span class="num">.</span></h1>
+      <p class="lede masthead__lede" data-anim>Market analysis, policy insight and property intelligence from the Costa del Sol, written by the people renovating buildings there.</p>
+    </div>
+  </div>
+</header>
+<main id="main">
+
+
+<!-- ============ THE MARKET IN NUMBERS ============ -->
+<section class="regulator">
+  <div class="wrap">
+    <p class="tag section__eyebrow" data-anim>Costa del Sol &middot; Spring 2026</p>
+    <h2 class="d2" data-anim="lines">The market in numbers<span class="num">.</span></h2>
+
+    <div class="figures" data-stagger>
+      <article class="figure" data-anim>
+        <p class="figure__v">8.1%</p>
+        <p class="tag figure__l">Marbella prime price growth</p>
+        <p class="note figure__n">Outperforming every major European prime market. London prime fell 4.7% over the same period.</p>
+      </article>
+      <article class="figure" data-anim>
+        <p class="figure__v">42.5%</p>
+        <p class="tag figure__l">Foreign buyer share, M&aacute;laga</p>
+        <p class="note figure__n">More than double the national average. In Benahav&iacute;s, the figure reached 84.3%.</p>
+      </article>
+      <article class="figure" data-anim>
+        <p class="figure__v">&euro;740M</p>
+        <p class="tag figure__l">Four Seasons Marbella budget</p>
+        <p class="note figure__n">105 hotel keys, ~127 branded residences. The most ambitious hospitality deal on the Costa del Sol.</p>
+      </article>
+      <article class="figure" data-anim>
+        <p class="figure__v">12.7%</p>
+        <p class="tag figure__l">Spain house price rise 2025</p>
+        <p class="note figure__n">The steepest annual gain in 18 years. 714,237 transactions, a new record since 2007.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ARTICLES ============ -->
+<section class="steps">
+  <div class="wrap">
+    <h2 class="d2" data-anim="lines">Three stories shaping the coast<span class="num">.</span></h2>
+    <p class="lede steps__intro" data-anim>Every article is grounded in primary data: transaction records, planning documents and institutional research. No opinion dressed as analysis.</p>
+
+    <div class="posts" data-stagger>
+      <a class="post" href="four-seasons-marbella/index.html" data-anim>
+        <p class="tag">Landmark Development &middot; April 2026</p>
+        <h3 class="post__t">Four Seasons Is Coming to Marbella<span class="num">,</span> and Everything Changes</h3>
+        <p class="note post__p">Immobel and Fort Partners have secured full land control for the most ambitious luxury hospitality project in Costa del Sol history: 105 hotel keys, 127 branded residences and 750 metres of private coastline.</p>
+        <div class="post__foot">
+          <span class="post__read">Read the full story <span aria-hidden="true">&rarr;</span></span>
+          <span class="tag post__time">6 min read</span>
+        </div>
+      </a>
+      <a class="post" href="marbella-record-prices/index.html" data-anim>
+        <p class="tag">Market Intelligence &middot; Q1 2026</p>
+        <h3 class="post__t">Marbella&rsquo;s Record Prices<span class="num">,</span> and the Logic Behind Them</h3>
+        <p class="note post__p">At &euro;6,075 per square metre and an 8.1% annual rise, Marbella prime real estate is outperforming almost every European benchmark. Here is why the numbers keep climbing.</p>
+        <div class="post__foot">
+          <span class="post__read">Read the full story <span aria-hidden="true">&rarr;</span></span>
+          <span class="tag post__time">7 min read</span>
+        </div>
+      </a>
+      <a class="post" href="golden-visa-gone/index.html" data-anim>
+        <p class="tag">Policy &amp; Demand &middot; 2025-2026</p>
+        <h3 class="post__t">The Golden Visa Is Gone. Why International Buyers Are Still Here.</h3>
+        <p class="note post__p">Spain abolished its property golden visa in April 2025. Twelve months on, foreign demand has not merely survived: in M&aacute;laga, it has set a new record.</p>
+        <div class="post__foot">
+          <span class="post__read">Read the full story <span aria-hidden="true">&rarr;</span></span>
+          <span class="tag post__time">7 min read</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ UPDATES ============ -->
+<section class="courtyard">
+  <div class="wrap courtyard__grid">
+    <div>
+      <h2 class="d2" data-anim="lines">Notes from the site<span class="num">.</span></h2>
+      <p class="lede courtyard__p" data-anim>Occasional writing about the buildings we are working on, the M&aacute;laga market, and how renovation actually goes as opposed to how it was planned.</p>
+    </div>
+
+    <div class="signup" id="updates" data-anim>
+      <p class="tag">Company updates</p>
+      <h3 class="d4 signup__t">Take a seat at the courtyard<span class="num">.</span></h3>
+      <p class="note signup__p">Occasional notes from Fundaro, what we are building, where, and what we have learned doing it. A few times a year at most.</p>
+
+      <form class="signup__form" action="#" method="post">
+        <label class="tag" for="email">Email address</label>
+        <div class="signup__row">
+          <input id="email" name="email" type="email" required placeholder="name@example.com" autocomplete="email">
+          <button class="btn btn--dark" type="submit">Keep me updated <span aria-hidden="true">&rarr;</span></button>
+        </div>
+      </form>
+
+      <p class="signup__small">By subscribing you agree to receive occasional updates from Fundaro. Unsubscribe at any time. We do not share your address with anyone.</p>
+
+      <div class="signup__done" role="status" aria-live="polite" hidden>
+        <p class="tag">Confirmation sent &middot; Check your inbox</p>
+        <p class="signup__thanks">Thank you. You will hear from us occasionally, and not often.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div>
+        <div class="footer__logo"><img src="../assets/logo-dark.svg" alt="Fundaro"></div>
+        <p class="footer__line">The courtyard where capital meets real estate<span class="num">.</span></p>
+        <p class="footer__sub">Residential real estate in M&aacute;laga and southern Spain. SIA &ldquo;Fundaro&rdquo;, Riga and M&aacute;laga.</p>
+      </div>
+
+      <div class="footer__cols">
+        <div>
+          <p class="tag">Company</p>
+          <ul>
+            <li><a href="/#services">What we do</a></li>
+            <li><a href="/#featured">Where we work</a></li>
+            <li><a href="/#our-impact">The company</a></li>
+            <li><a href="/#team">Team</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="tag">More</p>
+          <ul>
+            <li><a href="index.html">Journal</a></li>
+            <li><a href="#updates">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="tag">Legal</p>
+          <ul>
+            <li><a href="/">Legal notice</a></li>
+            <li><a href="/">Privacy Policy</a></li>
+            <li><a href="/">Cookie Policy</a></li>
+            <li><a href="/">Website terms of use</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <p class="footer__disclaimer">SIA &ldquo;Fundaro&rdquo;, registration number 40203749200, VAT number LV40203749200, LEI 875500YJH4Y0XCESGA65, Ranka dambis 30-130, Riga, LV-1048, Latvia. This website is for general information about the company and its activities. It is not an offer, invitation or inducement to acquire any financial instrument, and nothing on it should be read as financial, investment, tax or legal advice.</p>
+
+    <div class="footer__bot">
+      <p>&copy; 2026 SIA &ldquo;Fundaro&rdquo;. All rights reserved.</p>
+      <p>Riga, Latvia &middot; M&aacute;laga, Spain</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------------------------------------------------------------
+   In-page navigation. Anchor links glide to their section instead of
+   jumping. Links to another page keep their normal behaviour.
+   --------------------------------------------------------------- */
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var frame = 0;
+  var running = false;
+
+  function ease(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  function stop() {
+    running = false;
+    if (frame) cancelAnimationFrame(frame);
+    frame = 0;
+  }
+
+  ['wheel', 'touchstart', 'keydown'].forEach(function (evt) {
+    window.addEventListener(evt, function () { if (running) stop(); }, { passive: true });
+  });
+
+  function positionOf(el) {
+    var margin = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+    var top = el.getBoundingClientRect().top + window.pageYOffset - margin;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    return Math.max(0, Math.min(Math.round(top), Math.round(max)));
+  }
+
+  function glide(to, then) {
+    var from = window.pageYOffset;
+    var delta = to - from;
+    if (!delta) { then(); return; }
+    var duration = Math.min(1300, Math.max(550, Math.abs(delta) * 0.45));
+    var start = performance.now();
+    running = true;
+    frame = requestAnimationFrame(function step(now) {
+      if (!running) return;
+      var p = Math.min(1, (now - start) / duration);
+      window.scrollTo(0, from + delta * ease(p));
+      if (p < 1) { frame = requestAnimationFrame(step); }
+      else { stop(); then(); }
+    });
+  }
+
+  function land(el, href) {
+    if (history.replaceState) history.replaceState(null, '', href);
+    if (!el) return;
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+    el.focus({ preventScroll: true });
+  }
+
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var link = e.target.closest && e.target.closest('a[href]');
+    if (!link) return;
+
+    var href = link.getAttribute('href');
+    if (!href || href.charAt(0) !== '#') return;
+
+    var id = href.slice(1);
+    var el = id ? document.getElementById(id) : null;
+    if (id && !el) return;
+
+    e.preventDefault();
+    stop();
+    var to = el ? positionOf(el) : 0;
+    if (reduce.matches) { window.scrollTo(0, to); land(el, href); return; }
+    glide(to, function () { land(el, href); });
+  });
+})();
+</script>
+
+<script>
+/* ---------------------------------------------------------------
+   Motion. One observer drives every entry animation on the page:
+   an element is revealed the first time it reaches the viewport and
+   is then dropped, so nothing runs on a second pass.
+   --------------------------------------------------------------- */
+(function () {
+  var root = document.documentElement;
+  if (!root.classList.contains('js')) return;
+
+  try {
+    document.querySelectorAll('[data-anim="lines"]').forEach(function (el) {
+      el.innerHTML = el.innerHTML.split(/<br\s*\/?>/i).map(function (line, i) {
+        return '<span class="ln" style="--i:' + i + '"><span>' + line + '</span></span>';
+      /* joined on a space: the <br> is gone once the lines are wrapped, and
+         without it the extracted text reads "real estatein southern" */
+      }).join(' ');
+    });
+
+    document.querySelectorAll('[data-stagger]').forEach(function (group) {
+      Array.prototype.forEach.call(group.children, function (child, i) {
+        child.style.setProperty('--i', i);
+      });
+    });
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -10% 0px' });
+
+    document.querySelectorAll('[data-anim]').forEach(function (el) { io.observe(el); });
+
+    /* the masthead is already on screen: play it on load, not on scroll */
+    requestAnimationFrame(function () {
+      document.querySelectorAll('.masthead [data-anim]').forEach(function (el) {
+        io.unobserve(el);
+        el.classList.add('is-in');
+      });
+    });
+  } catch (err) {
+    root.classList.remove('js');
+  }
+})();
+</script>
+
+<script>
+/* ---------------------------------------------------------------
+   Signup success state. The form has no endpoint yet, so this only
+   swaps the card to its confirmation copy; wire the POST to a real
+   list before launch and move this into its success handler.
+   --------------------------------------------------------------- */
+(function () {
+  document.querySelectorAll('.signup__form').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      /* let the browser say what is wrong with the address */
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      var card = form.closest('.signup');
+      var done = card && card.querySelector('.signup__done');
+      if (!done) return;
+
+      done.hidden = false;
+      void done.offsetWidth;          /* let the hidden state paint once, so it can transition */
+      card.classList.add('is-done');
+      done.setAttribute('tabindex', '-1');
+      done.focus({ preventScroll: true });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

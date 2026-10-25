@@ -1,0 +1,1625 @@
+/* =========================================================
+   Fundaro - landing page
+   Built from Figma file xktVM5MqH1jj7szPnYYGMg, node 1:2
+   Canvas: 1440 × 5663. Content column 1296px, 72px gutters.
+   ========================================================= */
+
+:root {
+  /* Palette - taken verbatim from the Figma fills */
+ --ink:        #271732;  /* deep aubergine, primary dark */
+ --cream:      #e7ded5;  /* warm light band + light text on dark */
+ --paper:      #e7ded5;  /* slightly lighter cream (team heading) */
+ --yellow:     #feee00;  /* accent / primary button */
+ --graphite:   #271732;  /* body text on light bands */
+ --card-cream: #dbd3ca;  /* team card background */
+ --rule:       rgba(39, 23, 50, 0.18);  /* ledger hairlines */
+ --hairline:   rgba(39, 23, 50, 0.25);  /* nav button border */
+
+  /* Type stacks: the real faces first (so they render if installed
+     locally), then the closest widely available substitutes.
+     Both faces are served from assets/fonts/ (see below), so the
+     substitutes apply only if a font file fails to load. */
+ --display: 'Playfair Display', Didot, 'Bodoni 72', 'Bodoni MT',
+             Georgia, serif;
+ --body:    'Optima nova LT Pro', 'Optima nova', Optima, Candara,
+             'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+
+  /* Fluid gutter: 72px at the design width, tighter on small screens */
+ --gutter: clamp(20px, 5vw, 72px);
+ --maxw: 1296px;
+ --radius: 5px;
+}
+
+/* =========================================================
+   WEBFONTS
+   All self-hosted from assets/fonts/. No third-party font request.
+
+     Playfair Display     400-900 variable   display
+     Optima nova LT Pro   400, 500, 700      body
+
+   Figma draws the display face in Mintely, but the only cut available
+   is "Mintely Reg Personal Use", which cannot be used commercially.
+   Playfair Display stands in until a licensed Mintely arrives: open
+   source (SIL OFL), a high-contrast serif of the same temperament, and
+   it carries real weights rather than one.
+
+   700 is here because the journal articles set figures in <strong>;
+   without it the browser would smear the Regular into a fake bold.
+   Light 300 was supplied but nothing uses it, so it is not served.
+
+   font-display: swap - the fallback shows immediately and is replaced
+   when the face arrives, rather than holding the text invisible.
+   ========================================================= */
+/* Playfair Display is a variable font: one file spans 400 to 900, so the
+   600 on team names is a real weight, not a synthesised one. Split by
+   subset the way Google serves it, so latin-ext is fetched only if a page
+   actually sets a character from that range. */
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('assets/fonts/playfair-display-latin.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+    U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('assets/fonts/playfair-display-latin-ext.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+    U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F,
+    U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+    U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Optima nova LT Pro';
+  src: url('assets/fonts/optima-nova-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Optima nova LT Pro';
+  src: url('assets/fonts/optima-nova-medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Optima nova LT Pro';
+  src: url('assets/fonts/optima-nova-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--body);
+  color: var(--graphite);
+  background: var(--paper);
+  overflow-x: hidden;
+}
+img, svg { display: block; max-width: 100%; }
+ul { margin: 0; padding: 0; list-style: none; }
+a { color: inherit; }
+p { margin: 0; }
+h1, h2, h3, h4 { margin: 0; font-weight: 400; }
+
+/* ---------- shared primitives ---------- */
+.wrap {
+  width: 100%;
+  max-width: calc(var(--maxw) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.d1 {
+  font-family: var(--display);
+  font-size: clamp(40px, 6.88vw, 99px);
+  line-height: 0.94;
+  letter-spacing: -0.018em;
+}
+.d2 {
+  font-family: var(--display);
+  font-size: clamp(30px, 4.58vw, 66px);
+  line-height: 1;
+  letter-spacing: -0.018em;
+}
+.d4 {
+  font-family: var(--display);
+  font-size: clamp(19px, 1.67vw, 24px);
+  line-height: 1.18;
+  letter-spacing: -0.006em;
+}
+.lede {
+  font-size: clamp(15px, 1.18vw, 17px);
+  line-height: 1.66;
+}
+.note {
+  font-size: clamp(13.5px, 1.01vw, 14.5px);
+  line-height: 1.6;
+}
+/* Small letter-spaced caps used for every label in the design */
+.tag {
+  font-size: clamp(10px, 0.73vw, 10.5px);
+  line-height: 1.62;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+/* Numerals are set in the sans face inside serif headings - the design
+   mixes the two deliberately (€500, 30+, 24 months, P2P …). */
+.num { font-family: var(--body); }
+
+/* ---------- buttons & links ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 22px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  font-family: var(--body);
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.btn--primary {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--ink);
+  font-size: 14.5px;
+  padding: 16px 30px;
+  min-height: 55px;
+}
+.btn--dark {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--cream);
+  font-size: 15px;
+  padding: 11px 14px;
+  min-height: 45px;
+  gap: 16px;
+}
+.btn--ghost {
+  border-color: var(--hairline);
+  color: var(--hairline);
+  background: transparent;
+  font-size: 13px;
+  padding: 11px 22px;
+  min-height: 45px;
+}
+.btn--ghost:hover { color: var(--cream); border-color: var(--cream); }
+.btn--primary:hover { filter: brightness(0.94); }
+.btn--dark:hover { background: #000000; }
+
+.tlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 15px;
+  text-decoration: none;
+}
+.tlink span:first-child { text-decoration: underline; }
+
+/* =========================================================
+   HERO  (Figma band 0-837)
+   ========================================================= */
+.hero {
+  position: relative;
+  color: var(--cream);
+  padding-block: 56px 51px;
+  isolation: isolate;
+}
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--ink);
+  overflow: hidden;
+}
+.hero__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.hero__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(39, 23, 50, 0.5);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 45px;
+}
+.nav__logo { width: 120px; height: 22.71px; }
+.nav__logo img { width: 100%; height: 100%; }
+.nav__links {
+  display: flex;
+  gap: 48px;
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--cream);
+}
+.nav__links a { text-decoration: none; }
+.nav__links a:hover { color: var(--cream); }
+
+.hero__body { margin-top: 88px; }
+.hero__lede { margin-top: 32px; max-width: 582px; }
+.hero__actions {
+  margin-top: 49px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px 46px;
+}
+.hero__facts {
+  margin-top: 62px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px 88px;
+}
+.fact__v {
+  font-family: var(--display);
+  font-size: clamp(30px, 3.2vw, 46px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+.fact__l { margin-top: 20px; white-space: nowrap; }
+
+/* =========================================================
+   FOUR STEPS  (Figma band 837-1674)
+   ========================================================= */
+.steps {
+  background: var(--cream);
+  color: var(--graphite);
+  padding-block: 100px 205px;
+}
+.steps h2 { max-width: 870px; }
+.steps__grid {
+  margin-top: 107px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+.step {
+  background: var(--ink);
+  border-radius: var(--radius);
+  color: var(--cream);
+  padding: 31px 14px 20px;
+  min-height: 290px;
+}
+.step__n {
+  font-family: var(--body);
+  font-size: clamp(34px, 3.2vw, 46px);
+  line-height: 1;
+  color: var(--yellow);
+}
+.step__t {
+  margin-top: 21px;
+  font-family: var(--display);
+  font-size: clamp(18px, 1.53vw, 22px);
+  line-height: 1.29;
+  letter-spacing: -0.007em;
+}
+.step__note { margin-top: 24px; }
+
+/* =========================================================
+   FIRST PROPERTY  (Figma band 1674-2511)
+   ========================================================= */
+.property {
+  background: var(--ink);
+  color: var(--cream);
+  padding-block: 76px 32px;
+}
+.property__head {
+  display: grid;
+  grid-template-columns: 55.2% 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.property__head h2 { max-width: 684px; }
+.property__aside { padding-top: 9px; }
+.property__aside .lede { color: rgba(231, 222, 213, 0.9); max-width: 541px; }
+.property__actions {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+}
+
+.split {
+  margin-top: 76px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: var(--radius);
+  overflow: hidden;
+  min-height: 523px;
+}
+.split__img { position: relative; min-height: 320px; }
+.split__img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 54.5% center;
+}
+.panel {
+  background: var(--cream);
+  color: var(--graphite);
+  padding: 58px 49px;
+}
+.panel .tag { color: var(--ink); }
+.ledger { margin-top: 49px; }
+.lrow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 21px;
+  border-top: 1px solid var(--rule);
+}
+.lrow:first-child { border-top: 0; padding-top: 0; }
+.lrow .tag { letter-spacing: 0.24em; color: var(--ink); }
+.lrow__v {
+  font-family: var(--display);
+  font-size: clamp(22px, 2.22vw, 32px);
+  line-height: 1.08;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   THE ASSET  (Figma band 2511-3348)
+   ========================================================= */
+.asset {
+  background: var(--cream);
+  color: var(--graphite);
+  padding-top: 100px;
+  padding-bottom: 55px;
+}
+.asset__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.asset__head .btn { margin-top: 11px; }
+/* Full-bleed image row: exact Figma proportions 422 / 23 / 638 / 39 / 319
+   out of 1441, 516 tall. */
+.asset__row {
+  margin-top: 100px;
+  display: grid;
+  grid-template-columns: 29.285% 1.596% 44.275% 2.706% 22.138%;
+  aspect-ratio: 1441 / 516;
+  max-height: 560px;
+}
+.asset__row figure { margin: 0; height: 100%; overflow: hidden; }
+.asset__row img { width: 100%; height: 100%; object-fit: cover; }
+/* Horizontal crop offsets computed from the Figma image transforms */
+.asset__row img.p1 { object-position: 100% center; }
+.asset__row img.p2 { object-position: 42% center; }
+.asset__row img.p3 { object-position: 23% center; }
+
+/* =========================================================
+   REGULATOR  (Figma band 3348-4185)
+   ========================================================= */
+.regulator {
+  background: var(--yellow);
+  color: var(--ink);
+  padding-block: 80px 107px;
+}
+.regulator h2 { max-width: 1101px; }
+.regulator__p {
+  margin-top: 47px;
+  max-width: 1008px;
+  color: var(--graphite);
+  font-size: clamp(16px, 1.32vw, 19px);
+  line-height: 1.55;
+}
+.pillars {
+  margin-top: 53px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.pillar {
+  background: var(--ink);
+  border-radius: var(--radius);
+  color: rgba(231, 222, 213, 0.9);
+  padding: 56px 35px 40px;
+  min-height: 330px;
+}
+/* the numeral above this was removed, so the heading leads the card */
+.pillar .d4 { margin-top: 0; }
+.pillar .note { margin-top: 27px; }
+
+/* =========================================================
+   TEAM  (Figma band 4185-5022)
+   ========================================================= */
+.team {
+  background: var(--ink);
+  color: var(--paper);
+  padding-block: 98px 154px;
+}
+.team h2 { max-width: 1101px; }
+.team__grid {
+  margin-top: 83px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 21px 25px;
+}
+.member {
+  display: grid;
+  grid-template-columns: 36% 1fr;
+  background: var(--card-cream);
+  color: var(--graphite);
+  overflow: hidden;
+  min-height: 175px;
+}
+.member__photo {
+  width: 100%;
+  height: 100%;
+  /* cut-out figures: show the whole person, standing on the card floor */
+  object-fit: contain;
+  object-position: bottom center;
+  align-self: end;
+}
+.member__body { padding: 14px 16px; position: relative; }
+.member__name {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(15px, 1.11vw, 16px);
+  line-height: 1.2;
+  color: var(--ink);
+  padding-right: 26px;
+}
+.member__role {
+  margin-top: 4px;
+  font-size: clamp(10px, 0.76vw, 11px);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+.member__bio {
+  margin-top: 10px;
+  font-size: clamp(11px, 0.83vw, 12px);
+  line-height: 1.45;
+}
+.member__in {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  background: var(--ink);
+  color: var(--card-cream);
+  font-family: var(--body);
+  font-size: 10px;
+  font-weight: 500;
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+}
+
+/* =========================================================
+   FOOTER  (Figma band 5024-5663)
+   ========================================================= */
+.footer {
+  background: var(--cream);
+  color: var(--ink);
+  padding-block: 108px 54px;
+}
+.footer__top {
+  display: grid;
+  grid-template-columns: 38.5% 1fr;
+  gap: 40px;
+}
+.footer__logo { width: 120px; height: 22.71px; margin-top: 14px; }
+.footer__line {
+  margin-top: 44px;
+  font-family: var(--display);
+  font-size: clamp(18px, 1.46vw, 21px);
+  line-height: 1.35;
+  max-width: 359px;
+}
+.footer__sub {
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.62;
+  max-width: 311px;
+}
+.footer__cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.footer__cols .tag { letter-spacing: 0.26em; }
+.footer__cols ul { margin-top: 32px; }
+.footer__cols li + li { margin-top: 14px; }
+.footer__cols a {
+  font-size: 14.5px;
+  line-height: 1.62;
+  text-decoration: none;
+}
+.footer__cols a:hover { text-decoration: underline; }
+.footer__disclaimer {
+  margin-top: 108px;
+  max-width: 727px;
+  font-size: 12.5px;
+  line-height: 1.66;
+}
+.footer__bot {
+  margin-top: 149px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 10.5px;
+  line-height: 1.62;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 1100px) {
+  .steps__grid { grid-template-columns: repeat(2, 1fr); }
+  .pillars     { grid-template-columns: repeat(2, 1fr); }
+  .team__grid  { grid-template-columns: repeat(2, 1fr); }
+  .nav__links  { gap: 28px; }
+  .hero__facts { gap: 28px 56px; }
+}
+
+@media (max-width: 900px) {
+  .nav__links { display: none; }
+  .property__head { grid-template-columns: 1fr; }
+  .property__aside { padding-top: 0; }
+  .split { grid-template-columns: 1fr; min-height: 0; }
+  .split__img { aspect-ratio: 648 / 400; min-height: 0; }
+  .footer__top { grid-template-columns: 1fr; }
+  .footer__disclaimer { margin-top: 56px; }
+  .footer__bot { margin-top: 56px; }
+  .steps  { padding-block: 72px 96px; }
+  .team   { padding-block: 72px 96px; }
+  .regulator { padding-block: 64px 80px; }
+  .asset  { padding-top: 72px; }
+  .property { padding-block: 64px 40px; }
+  .footer { padding-block: 72px 40px; }
+  .steps__grid, .team__grid { margin-top: 56px; }
+  .pillars { margin-top: 40px; }
+  .asset__row { margin-top: 56px; }
+  .hero__body { margin-top: 56px; }
+  .hero__facts { margin-top: 44px; }
+}
+
+@media (max-width: 700px) {
+  .steps__grid { grid-template-columns: 1fr; }
+  .pillars     { grid-template-columns: 1fr; }
+  .team__grid  { grid-template-columns: 1fr; }
+  .footer__cols { grid-template-columns: 1fr; gap: 40px; }
+  .step { min-height: 0; }
+  .pillar { min-height: 0; padding: 36px 28px; }
+  .panel { padding: 40px 28px; }
+  .asset__row {
+    grid-template-columns: 1fr;
+    aspect-ratio: auto;
+    max-height: none;
+    gap: 12px;
+  }
+  .asset__row .spacer { display: none; }
+  .asset__row figure { aspect-ratio: 3 / 2; }
+  .hero { padding-block: 32px 64px; }
+  .hero__actions { gap: 16px 24px; }
+  .fact__l { white-space: normal; }
+  .member { grid-template-columns: 40% 1fr; }
+  .lrow { padding-block: 16px; }
+}
+
+/* =========================================================
+   CONTENT ADAPTATION - fundaro.capital
+   Additions only: the bands above are untouched. These styles
+   cover the sections the corporate site has that the original
+   Figma landing did not (three-part model, four principles,
+   company register, advisory cards, journal + signup).
+   ========================================================= */
+
+/* ---------- shared: small eyebrow above every section head ---------- */
+.section__eyebrow { margin-bottom: 22px; opacity: 0.7; }
+.hero .section__eyebrow,
+.property .section__eyebrow,
+.team .section__eyebrow { color: var(--cream); }
+.regulator .section__eyebrow { color: var(--ink); opacity: 0.6; }
+
+/* ---------- hero ---------- */
+/* Background video: the iframe is scaled to cover the band, with
+   assets/hero.png sitting underneath as the poster until it loads.
+   The ::after scrim in the block above still paints over both. */
+.hero__video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 56.25vw;          /* 16:9 */
+  min-width: 177.78vh;      /* cover on tall / narrow viewports */
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  border: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 900ms ease;
+}
+/* revealed only once the player reports it is actually playing, so
+   assets/hero.png carries the band until then */
+.hero__video.is-ready { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .hero__video { display: none; }
+}
+
+/* The hero fills the screen, phone or desktop. svh rather than dvh, so a
+   mobile browser hiding its chrome never resizes the band mid-scroll; the
+   vh line is the fallback for anything that does not know svh. min-height
+   rather than height, so a short landscape screen grows the band instead
+   of cropping the headline. */
+.hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+/* .hero__bg is absolute, so the column is just the nav and the copy */
+.hero > .wrap {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+/* nav stays at the top; the copy centres in whatever is left, biased a
+   little above the middle by the padding the old stats row used to fill */
+.hero__body {
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-bottom: calc(62px + clamp(30px, 3.2vw, 46px) + 41px);
+}
+@media (max-width: 900px) {
+  .hero__body { padding-bottom: calc(44px + clamp(30px, 3.2vw, 46px) + 41px); }
+}
+
+/* ---------- what we do: three cards instead of four ---------- */
+.steps__intro {
+  margin-top: 30px;
+  max-width: 806px;
+}
+.steps__grid--3 { grid-template-columns: repeat(3, 1fr); }
+.steps__grid--3 .step { padding: 31px 28px 32px; min-height: 320px; }
+
+/* ---------- numeral reveal ---------- */
+/* The yellow numerals are the only accent-coloured mark on these cards, so
+   they carry the motion: each stroke of the roman numeral wipes upward in
+   turn as the card comes into view. The card, its type and the layout never
+   move.
+   Everything here is gated behind .js, which is only set when the browser
+   supports IntersectionObserver and the reader has not asked for less
+   motion - otherwise the numerals are simply there from the start. */
+.step__n span { display: inline-block; }
+
+.js .step__n span {
+  display: inline-block;
+  clip-path: inset(105% 0 0 0);
+  opacity: 0;
+  transition:
+    clip-path 640ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 380ms ease;
+  transition-delay: calc(var(--card, 0ms) + var(--stroke, 0ms));
+}
+.js .step.is-in .step__n span {
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
+}
+
+/* stroke by stroke, then card after card */
+.step__n span:nth-child(2) { --stroke: 90ms; }
+.step__n span:nth-child(3) { --stroke: 180ms; }
+.steps__grid .step:nth-child(2)  { --card: 110ms; }
+.steps__grid .step:nth-child(3)  { --card: 220ms; }
+
+/* ---------- where we work: two blocks inside the split panel ---------- */
+.panel .pblock + .pblock {
+  margin-top: 38px;
+  padding-top: 38px;
+  border-top: 1px solid var(--rule);
+}
+/* the MARKET / SEAT label above this moved into the heading itself */
+.pblock__t { margin-top: 0; color: var(--ink); }
+.pblock__p { margin-top: 14px; }
+.ticks {
+  margin-top: 20px;
+  display: grid;
+  gap: 9px;
+  font-size: clamp(12.5px, 0.9vw, 13px);
+  line-height: 1.5;
+}
+.ticks li {
+  position: relative;
+  padding-left: 26px;
+  color: var(--ink);
+}
+.ticks { counter-reset: tick; }
+.ticks li::before {
+  counter-increment: tick;
+  content: counter(tick, upper-roman);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: var(--body);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  line-height: 1.85;
+  color: var(--ink);
+  opacity: 0.6;
+}
+/* the panel now carries copy, not a ledger - let it breathe */
+.split { min-height: 0; }
+.split__img { min-height: 420px; }
+
+/* ---------- the work: scroll-linked image strip ---------- */
+/* Full-bleed track. Default (no JS / reduced motion) it is a normal
+   horizontally scrollable row; JS adds .is-linked and drives the
+   transform from the section's progress through the viewport. */
+.strip {
+  margin-top: 100px;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+ -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.strip::-webkit-scrollbar { display: none; }
+.strip.is-linked { overflow: hidden; }
+.strip__track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  will-change: transform;
+}
+.strip__item {
+  margin: 0;
+  flex: 0 0 auto;
+  height: clamp(260px, 34vw, 520px);
+  overflow: hidden;
+}
+.strip__item img { width: 100%; height: 100%; object-fit: cover; }
+/* widths keep the wide / narrow rhythm of the original row */
+.strip__item--a { width: clamp(340px, 56vw, 820px); }
+.strip__item--b { width: clamp(420px, 72vw, 1060px); }
+.strip__item--c { width: clamp(260px, 42vw, 620px); }
+
+/* ---------- how we work: four principles ---------- */
+.pillars--4 { grid-template-columns: repeat(4, 1fr); }
+.pillars--4 .pillar { padding: 38px 28px 34px; min-height: 280px; }
+
+/* ---------- the company ---------- */
+.company {
+  background: var(--paper);
+  color: var(--graphite);
+  padding-block: 100px 110px;
+}
+.company .section__eyebrow { color: var(--ink); opacity: 0.6; }
+.company__grid {
+  display: grid;
+  grid-template-columns: 1fr 42%;
+  gap: 40px 72px;
+  align-items: start;
+}
+.company__p { margin-top: 34px; max-width: 620px; }
+.quote {
+  margin: 46px 0 0;
+  padding-left: 26px;
+  border-left: 2px solid var(--yellow);
+  max-width: 620px;
+}
+.quote blockquote {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(19px, 1.74vw, 25px);
+  line-height: 1.34;
+  letter-spacing: -0.008em;
+  color: var(--ink);
+}
+.quote figcaption { margin-top: 18px; opacity: 0.7; }
+.company__note { margin-top: 30px; max-width: 620px; }
+
+.panel--paper {
+  background: var(--card-cream);
+  border-radius: var(--radius);
+  padding: 44px 40px 36px;
+}
+.ledger--sm { margin-top: 34px; }
+.ledger--sm .lrow { padding-block: 16px; }
+.ledger--sm .lrow__v {
+  font-size: clamp(16px, 1.25vw, 18px);
+  line-height: 1.35;
+  white-space: normal;
+}
+.panel__link { margin-top: 32px; color: var(--ink); }
+
+/* ---------- team ---------- */
+.team__label {
+  margin-top: 64px;
+  margin-bottom: 26px;
+  color: rgba(231, 222, 213, 0.65);
+}
+.team h2 + .team__label { margin-top: 56px; }
+/* Optional: split the grid into core + advisory rows. Add
+   <p class="tag team__label">…</p> before a grid, give the second grid
+   .team__grid--adv, and use .member--plain for people without a portrait. */
+.member--plain {
+  grid-template-columns: 1fr;
+  background: rgba(231, 222, 213, 0.09);
+  color: var(--paper);
+  border: 1px solid rgba(231, 222, 213, 0.22);
+  border-radius: var(--radius);
+  align-content: center;
+}
+.member--plain .member__name,
+.member--plain .member__role { color: var(--paper); }
+.member--plain .member__in {
+  background: rgba(231, 222, 213, 0.9);
+  color: var(--ink);
+}
+
+.team__grid--adv { grid-template-columns: repeat(4, 1fr); }
+.team__grid--adv .member { min-height: 140px; grid-template-columns: 42% 1fr; }
+.team__grid--adv .member--plain { grid-template-columns: 1fr; }
+
+/* ---------- journal + updates ---------- */
+.courtyard {
+  background: var(--cream);
+  color: var(--graphite);
+  padding-block: 96px 104px;
+}
+.courtyard .section__eyebrow { color: var(--ink); opacity: 0.6; }
+.courtyard__grid {
+  display: grid;
+  grid-template-columns: 1fr 45%;
+  gap: 48px 72px;
+  align-items: start;
+}
+.courtyard__p { margin-top: 30px; max-width: 520px; }
+.courtyard__link { margin-top: 30px; color: var(--ink); }
+
+.signup {
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: var(--radius);
+  padding: 44px 40px 38px;
+}
+.signup .tag { color: var(--yellow); }
+.signup__t { margin-top: 18px; }
+.signup__p { margin-top: 16px; color: rgba(231, 222, 213, 0.85); }
+.signup__form { margin-top: 30px; }
+.signup__form label { display: block; color: rgba(231, 222, 213, 0.7); }
+.signup__row {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.signup__row input {
+  flex: 1 1 220px;
+  min-height: 45px;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(231, 222, 213, 0.35);
+  background: transparent;
+  color: var(--cream);
+  font-family: var(--body);
+  font-size: 14.5px;
+}
+.signup__row input::placeholder { color: rgba(231, 222, 213, 0.45); }
+.signup__row input:focus {
+  outline: none;
+  border-color: var(--yellow);
+}
+.signup__row .btn--dark {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--ink);
+}
+.signup__row .btn--dark:hover { filter: brightness(0.94); }
+.signup__small {
+  margin-top: 20px;
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: rgba(231, 222, 213, 0.6);
+}
+
+/* ---------- responsive for the added bands ---------- */
+@media (max-width: 1100px) {
+  .pillars--4 { grid-template-columns: repeat(2, 1fr); }
+  .team__grid--adv { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 900px) {
+  .steps__grid--3 { grid-template-columns: 1fr; }
+  .company__grid,
+  .courtyard__grid { grid-template-columns: 1fr; }
+  .company { padding-block: 72px 88px; }
+  .courtyard { padding-block: 72px 88px; }
+  .split__img { min-height: 0; }
+}
+@media (max-width: 700px) {
+  .pillars--4 { grid-template-columns: 1fr; }
+  .pillars--4 .pillar { min-height: 0; padding: 32px 26px; }
+  .steps__grid--3 .step { min-height: 0; }
+  .panel--paper,
+  .signup { padding: 34px 26px 30px; }
+  .team__label { margin-top: 44px; }
+  .team__grid--adv { grid-template-columns: 1fr; }
+  /* the long headline needs to breathe on a phone */
+  .d1 { font-size: clamp(30px, 8vw, 48px); }
+}
+
+/* =========================================================
+   MOTION
+   One vocabulary used across the page: elements fade up a short
+   distance, display headings rise out of a mask line by line,
+   hairlines draw from their origin, photographs settle out of a
+   slow push-in. Nothing loops and nothing replays - each element
+   animates the first time it is seen and is then left alone.
+   Only opacity, transform and clip-path animate, so no frame
+   costs a re-layout.
+
+   Every hidden state is scoped to .js, which is set in <head>
+   only when IntersectionObserver exists and the reader has not
+   asked for reduced motion. Without it the page renders as the
+   finished state, with no flash and nothing to wait for.
+   ========================================================= */
+
+/* ---------- the base move: up and in ---------- */
+.js [data-anim] {
+  opacity: 0;
+  transform: translate3d(0, var(--rise, 14px), 0);
+  transition:
+    opacity 700ms ease,
+    transform 780ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--i, 0) * 80ms + var(--d, 0ms));
+}
+.js [data-anim].is-in { opacity: 1; transform: none; }
+
+/* ---------- display headings: line by line, out of a mask ---------- */
+.js [data-anim="lines"] { opacity: 1; transform: none; transition: none; }
+.ln {
+  display: block;
+  overflow: hidden;
+  /* keep descenders and accented caps clear of the mask edge */
+  padding-bottom: 0.09em;
+  margin-bottom: -0.09em;
+}
+.js [data-anim="lines"] .ln > span {
+  display: block;
+  transform: translate3d(0, 110%, 0);
+  transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--i, 0) * 90ms + var(--d, 0ms));
+}
+.js [data-anim="lines"].is-in .ln > span { transform: none; }
+
+/* ---------- photographs settle out of a slow push-in ---------- */
+.js [data-anim="zoom"] { opacity: 1; transform: none; }
+.js [data-anim="zoom"] img {
+  opacity: 0;
+  transform: scale(1.06);
+  transition:
+    transform 1500ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 900ms ease;
+}
+.js [data-anim="zoom"].is-in img { opacity: 1; transform: none; }
+
+/* ---------- hairlines draw instead of appearing ---------- */
+.js .ledger--sm .lrow { position: relative; border-top-color: transparent; }
+.js .ledger--sm .lrow::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--rule);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+.js .ledger--sm .lrow:first-child::after { display: none; }
+.js .ledger--sm .lrow.is-in::after { transform: none; }
+
+.js .panel .pblock + .pblock { position: relative; border-top-color: transparent; }
+.js .panel .pblock + .pblock::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--rule);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1) 140ms;
+}
+.js .panel .pblock + .pblock.is-in::before { transform: none; }
+
+.js .quote { position: relative; border-left-color: transparent; }
+.js .quote::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -2px;
+  width: 2px;
+  background: var(--yellow);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1) 140ms;
+}
+.js .quote.is-in::before { transform: none; }
+
+/* ---------- per-element tuning ---------- */
+.hero .d1      { --d: 80ms; }
+.hero__lede    { --d: 360ms; }
+.hero__actions { --d: 500ms; }
+.section__eyebrow { --rise: 8px; }
+.ticks li      { --rise: 8px; }
+.lrow          { --rise: 8px; }
+.member        { --rise: 12px; }
+
+/* =========================================================
+   HOVER
+   Small, single-property moves at a shorter duration than the
+   entry animations, so pointing at something feels immediate
+   while arriving on it feels considered.
+   ========================================================= */
+.btn {
+  transition:
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 260ms ease,
+    background-color 260ms ease,
+    border-color 260ms ease,
+    color 260ms ease;
+}
+.btn:hover { transform: translateY(-1px); }
+
+/* the arrows lead the way out of the link */
+.btn span[aria-hidden],
+.tlink span[aria-hidden] {
+  display: inline-block;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn:hover span[aria-hidden],
+.tlink:hover span[aria-hidden] { transform: translateX(4px); }
+
+/* nav links draw a rule instead of switching one on. The footer is
+   deliberately left alone: no reveal, no drawn underline. */
+.nav__links a { position: relative; text-decoration: none; }
+.nav__links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -5px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav__links a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+/* =========================================================
+   TEAM PORTRAITS: grey until you point at them
+   One colour file per person, desaturated in CSS. The supplied
+   black-and-white exports measure within 1/255 of what
+   filter: grayscale(1) computes from the colour ones, so shipping
+   both files would double the bytes for an identical picture.
+
+   Guarded by hover:hover / pointer:fine. A phone cannot hover, and
+   without the guard every portrait would sit grey forever on touch,
+   which is the usual way this effect breaks.
+   ========================================================= */
+.member__photo {
+  transition:
+    filter 600ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .member__photo { filter: grayscale(1); }
+  /* focus-within keeps keyboard readers in step with the pointer */
+  .member:hover .member__photo,
+  .member:focus-within .member__photo {
+    filter: grayscale(0);
+    transform: scale(1.03);
+  }
+
+  /* the accent draws in under the card as the colour arrives */
+  .member { position: relative; }
+  .member::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: var(--yellow);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .member:hover::after,
+  .member:focus-within::after { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* colour is the information, so it still changes - just without the travel */
+  .member__photo { transition: filter 200ms linear; }
+  .member:hover .member__photo,
+  .member:focus-within .member__photo { transform: none; }
+  .member::after { transition: none; }
+}
+.member__in { transition: background-color 240ms ease, color 240ms ease; }
+.member__in:hover { background: var(--yellow); color: var(--ink); }
+
+.signup__row input { transition: border-color 240ms ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn:hover,
+  .btn:hover span[aria-hidden],
+  .tlink:hover span[aria-hidden],
+  .member:hover .member__photo { transform: none; }
+  .nav__links a::after { transition: none; }
+}
+
+/* ---------- in-page navigation ---------- */
+/* Sections land flush with the top of the viewport; the signup card is
+   not a band, so it keeps a little air above it. */
+#updates { scroll-margin-top: clamp(24px, 6vh, 56px); }
+/* the scroll script moves focus to the landed section - no ring on a
+   whole band, while the links themselves keep their own focus styles */
+[tabindex="-1"]:focus { outline: none; }
+
+/* =========================================================
+   JOURNAL
+   Subpages at /journal/ and /journal/<slug>/. Same bands, same
+   type scale and the same motion as the landing page; the only
+   new shapes are a compact masthead (the journal has no hero
+   film), a post card and a reading column.
+   ========================================================= */
+
+/* ---------- masthead ---------- */
+.masthead {
+  background: var(--ink);
+  color: var(--cream);
+  padding-block: 56px clamp(72px, 9vw, 120px);
+}
+
+/* With a photograph behind it the band needs height to read as an image
+   rather than a texture, and the copy centres in whatever is left below
+   the nav - the same arrangement as the landing hero. */
+.masthead--image {
+  position: relative;
+  isolation: isolate;
+  min-height: 58vh;
+  min-height: 58svh;
+  display: flex;
+  flex-direction: column;
+}
+.masthead--image > .wrap {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+/* auto margins centre the copy, the padding keeps it off the nav when
+   there is little space left to centre in */
+.masthead--image .masthead__body {
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-top: clamp(44px, 5vw, 80px);
+}
+
+.masthead__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: var(--ink);
+}
+.masthead__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+/* heavier than the hero scrim: a masthead carries a headline, a
+   standfirst, a byline and a link, and all four have to stay readable */
+.masthead__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(39, 23, 50, 0.7);
+}
+/* the index carries less copy, so its picture can come through more */
+.masthead--index .masthead__bg::after { background: rgba(39, 23, 50, 0.66); }
+.masthead .section__eyebrow { color: var(--cream); }
+.masthead__body { margin-top: clamp(64px, 9vw, 128px); }
+.masthead__body h1,
+.masthead__body h2 { max-width: 16ch; }
+.masthead__lede {
+  margin-top: 30px;
+  max-width: 620px;
+  color: rgba(231, 222, 213, 0.85);
+}
+.masthead--article .masthead__body h1 { max-width: 22ch; }
+
+/* article byline */
+.byline {
+  margin-top: 38px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 26px;
+  color: rgba(231, 222, 213, 0.7);
+}
+.byline .tag { letter-spacing: 0.22em; }
+.byline span[aria-hidden] { opacity: 0.4; }
+
+.backlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 34px;
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--cream);
+}
+.backlink span:last-child { text-decoration: underline; text-underline-offset: 3px; }
+.backlink span:first-child { transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1); }
+.backlink:hover span:first-child { transform: translateX(-4px); }
+
+/* ---------- the market in numbers ---------- */
+.figures { margin-top: 53px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.figure {
+  background: var(--ink);
+  border-radius: var(--radius);
+  color: rgba(231, 222, 213, 0.9);
+  padding: 40px 28px 34px;
+}
+.figure__v {
+  font-family: var(--display);
+  font-size: clamp(34px, 3.6vw, 52px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--yellow);
+}
+.figure__l { margin-top: 22px; color: var(--cream); }
+.figure__n { margin-top: 18px; color: rgba(231, 222, 213, 0.75); }
+
+/* ---------- post cards ---------- */
+.posts { margin-top: 72px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+.post {
+  display: flex;
+  flex-direction: column;
+  background: var(--card-cream);
+  border-radius: var(--radius);
+  padding: 34px 30px 30px;
+  text-decoration: none;
+  color: var(--graphite);
+}
+.post .tag { color: var(--ink); opacity: 0.7; }
+.post__t {
+  margin-top: 22px;
+  font-family: var(--display);
+  font-size: clamp(20px, 1.74vw, 25px);
+  line-height: 1.2;
+  letter-spacing: -0.008em;
+  color: var(--ink);
+}
+.post__p { margin-top: 18px; flex: 1; }
+.post__foot {
+  margin-top: 30px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(39, 23, 50, 0.16);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+.post__read { font-size: 14px; font-weight: 500; color: var(--ink); }
+.post__read span[aria-hidden] {
+  display: inline-block;
+  margin-left: 8px;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.post:hover .post__read span[aria-hidden] { transform: translateX(4px); }
+.post__time { color: var(--ink); opacity: 0.6; }
+
+/* ---------- reading column ---------- */
+.article { background: var(--paper); padding-block: clamp(64px, 8vw, 104px); }
+.prose { max-width: 726px; margin-inline: auto; }
+.prose > p {
+  margin-top: 24px;
+  font-size: clamp(15.5px, 1.22vw, 17.5px);
+  line-height: 1.75;
+}
+.prose > p:first-child { margin-top: 0; }
+.prose h2 {
+  margin-top: 60px;
+  font-family: var(--display);
+  font-size: clamp(24px, 2.29vw, 33px);
+  line-height: 1.1;
+  letter-spacing: -0.014em;
+  color: var(--ink);
+}
+.prose h3 {
+  margin-top: 44px;
+  font-family: var(--display);
+  font-size: clamp(19px, 1.53vw, 22px);
+  line-height: 1.2;
+  color: var(--ink);
+}
+.prose h2 + p, .prose h3 + p { margin-top: 18px; }
+.prose strong { font-weight: 600; color: var(--ink); }
+
+.pull {
+  margin: 52px 0 0;
+  padding-left: 26px;
+  border-left: 2px solid var(--yellow);
+  font-family: var(--display);
+  font-size: clamp(20px, 1.88vw, 27px);
+  line-height: 1.32;
+  letter-spacing: -0.008em;
+  color: var(--ink);
+}
+
+/* three numbers set across the column */
+.inline-figures {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding-block: 30px;
+  border-top: 1px solid rgba(39, 23, 50, 0.18);
+  border-bottom: 1px solid rgba(39, 23, 50, 0.18);
+}
+.inline-figure__v {
+  font-family: var(--display);
+  font-size: clamp(24px, 2.36vw, 34px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.inline-figure__l { margin-top: 12px; }
+
+.callout {
+  margin-top: 60px;
+  background: var(--ink);
+  color: rgba(231, 222, 213, 0.9);
+  border-radius: var(--radius);
+  padding: 42px 36px 38px;
+}
+.callout .tag { color: var(--yellow); }
+.callout__t {
+  margin-top: 18px;
+  font-family: var(--display);
+  font-size: clamp(21px, 1.81vw, 26px);
+  line-height: 1.2;
+  color: var(--cream);
+}
+.callout p { margin-top: 18px; }
+
+.sources {
+  margin-top: 68px;
+  padding-top: 26px;
+  border-top: 1px solid rgba(39, 23, 50, 0.18);
+}
+.sources ul { margin-top: 24px; display: grid; gap: 14px; }
+.sources li {
+  position: relative;
+  padding-left: 26px;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: rgba(39, 23, 50, 0.85);
+}
+.sources li::before {
+  counter-increment: src;
+  content: counter(src);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  color: var(--ink);
+  opacity: 0.55;
+}
+.sources ul { counter-reset: src; }
+.sources cite { font-style: normal; opacity: 0.6; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1100px) {
+  .figures { grid-template-columns: repeat(2, 1fr); }
+  .posts   { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 900px) {
+  .masthead { padding-block: 40px 72px; }
+  .masthead--image { min-height: 0; }
+  .masthead__body { margin-top: 56px; }
+  .article { padding-block: 56px; }
+}
+@media (max-width: 700px) {
+  .figures { grid-template-columns: 1fr; }
+  .posts   { grid-template-columns: 1fr; }
+  .inline-figures { grid-template-columns: 1fr; gap: 20px; }
+  .callout { padding: 32px 26px; }
+  .prose h2 { margin-top: 44px; }
+}
+
+/* ---------- signup: confirmation state ---------- */
+/* The form and its small print give way to the confirmation, so the
+   card never shows a stale field next to a thank-you. */
+.signup.is-done .signup__form,
+.signup.is-done .signup__small { display: none; }
+.signup__done { margin-top: 30px; }
+.signup__done .tag { color: var(--yellow); }
+.signup__thanks {
+  margin-top: 16px;
+  font-family: var(--display);
+  font-size: clamp(19px, 1.6vw, 23px);
+  line-height: 1.3;
+  letter-spacing: -0.008em;
+  color: var(--cream);
+  max-width: 26ch;
+}
+.signup__done:focus { outline: none; }
+/* it arrives the way everything else on the page does */
+.js .signup__done {
+  opacity: 0;
+  transform: translate3d(0, 8px, 0);
+  transition:
+    opacity 500ms ease,
+    transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.js .signup.is-done .signup__done { opacity: 1; transform: none; }
+
+/* ---------- skip link ---------- */
+/* Off-screen until a keyboard reaches it, then it lands in the top-left
+   corner as a normal button. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 10000;
+  padding: 12px 20px;
+  background: var(--yellow);
+  color: var(--ink);
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 0 0 var(--radius) 0;
+  text-decoration: none;
+}
+.skip-link:focus {
+  left: 0;
+  outline: 2px solid var(--ink);
+  outline-offset: -2px;
+}
+
+/* =========================================================
+   FAQ
+   Native <details>, so it opens without JavaScript, is
+   keyboard operable and searchable by find-in-page. The
+   shared name="faq" makes the group exclusive where the
+   browser supports it; where it does not, more than one can
+   sit open, which is harmless.
+   ========================================================= */
+.faq {
+  background: var(--cream);
+  color: var(--graphite);
+  padding-block: 100px 110px;
+}
+.faq__grid {
+  display: grid;
+  grid-template-columns: 1fr 52%;
+  gap: 40px 72px;
+  align-items: start;
+}
+.faq__intro { margin-top: 30px; max-width: 420px; }
+
+.faq__item { border-top: 1px solid rgba(39, 23, 50, 0.18); }
+.faq__item:last-child { border-bottom: 1px solid rgba(39, 23, 50, 0.18); }
+
+.faq__q {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block: 22px;
+  cursor: pointer;
+  font-family: var(--display);
+  font-size: clamp(17px, 1.39vw, 20px);
+  line-height: 1.3;
+  letter-spacing: -0.006em;
+  color: var(--ink);
+  list-style: none;              /* drop the default triangle */
+}
+.faq__q::-webkit-details-marker { display: none; }
+.faq__q:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+/* a plus that becomes a minus, drawn rather than typed */
+.faq__mark {
+  position: relative;
+  flex: 0 0 auto;
+  width: 13px;
+  height: 13px;
+  margin-top: 6px;
+}
+.faq__mark::before,
+.faq__mark::after {
+  content: '';
+  position: absolute;
+  inset: 50% 0 auto 0;
+  height: 1px;
+  background: var(--ink);
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq__mark::after { transform: rotate(90deg); }
+.faq__item[open] .faq__mark::after { transform: rotate(0deg); }
+
+.faq__a { padding-bottom: 26px; max-width: 54ch; }
+.faq__a .note { color: rgba(39, 23, 50, 0.92); }
+
+/* Where the browser can interpolate to auto, the panel slides open;
+   everywhere else it simply appears. */
+@supports (interpolate-size: allow-keywords) {
+  :root { interpolate-size: allow-keywords; }
+  .faq__item::details-content {
+    block-size: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      block-size 420ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 300ms ease,
+      content-visibility 420ms allow-discrete;
+  }
+  .faq__item[open]::details-content { block-size: auto; opacity: 1; }
+}
+
+@media (max-width: 900px) {
+  .faq { padding-block: 72px 88px; }
+  .faq__grid { grid-template-columns: 1fr; gap: 36px; }
+  .faq__intro { max-width: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq__mark::before,
+  .faq__mark::after { transition: none; }
+  .faq__item::details-content { transition: none; }
+}

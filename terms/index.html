@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head><script data-fndr="static-host">
+(function(){
+  window.FD_API_BASE="https://fndr.8nomads.com";window.FD_VIDEO_BASE="https://fndr.8nomads.com/v2/assets";window.FD_SITE_BASE="";
+  // Framer CMS byte ranges on a plain file host: fetch the whole file once, hand back the slices asked for
+  var f=window.fetch,cache={};
+  window.fetch=function(u,o){
+    try{
+      var url=new URL(typeof u==="string"?u:u.url,location.href),ranges=url.searchParams.get("range");
+      if(ranges&&/\.framercms$/.test(url.pathname)){
+        var key=url.origin+url.pathname;
+        var p=cache[key]||(cache[key]=f(key).then(function(r){if(!r.ok)throw new Error("cms "+r.status);return r.arrayBuffer()}));
+        return p.then(function(buf){
+          var b=new Uint8Array(buf),parts=[],n=0;
+          ranges.split(",").forEach(function(r){var m=/^(\d+)-(\d+)$/.exec(r);if(!m)throw new Error("bad range");var s=b.subarray(+m[1],+m[2]+1);parts.push(s);n+=s.length});
+          var out=new Uint8Array(n),off=0;parts.forEach(function(s){out.set(s,off);off+=s.length});
+          return new Response(out,{status:200,headers:{"content-type":"application/octet-stream"}})
+        })
+      }
+    }catch(e){}
+    return f.apply(this,arguments)
+  };
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terms of use · Fundáro</title>
+<meta name="description" content="Terms for using the Fundaro website.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="../assets/favicon.png">
+<style>
+@font-face { font-family: "Optima nova LT Pro"; src: url("../assets/fonts/optima-nova-regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Optima nova LT Pro"; src: url("../assets/fonts/optima-nova-medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Playfair Display"; src: url("../assets/fonts/playfair-display-latin.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
+:root { --ink: #271732; --cream: #e7ded5; --paper: #f3eee8; --yellow: #feee00; --muted: rgba(39, 23, 50, .72); }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Optima nova LT Pro", Optima, Candara, "Segoe UI", sans-serif; font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+header { position: sticky; top: 0; z-index: 2; background: rgba(243, 238, 232, .82); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(39, 23, 50, .1); }
+.bar { max-width: 860px; margin: 0 auto; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; }
+.logo { font-family: "Playfair Display", Georgia, serif; font-weight: 700; font-size: 26px; color: var(--ink); text-decoration: none; letter-spacing: -.01em; }
+.back { font-size: 15px; color: var(--ink); text-decoration: none; padding: 9px 16px; border-radius: 4px; background: var(--yellow); }
+main { max-width: 860px; margin: 0 auto; padding: 56px 24px 80px; }
+h1 { font-family: "Playfair Display", Georgia, serif; font-weight: 400; font-size: clamp(38px, 6vw, 58px); line-height: 1.05; margin: 0 0 12px; }
+.updated { color: var(--muted); font-size: 15px; margin: 0 0 40px; }
+h2 { font-family: "Playfair Display", Georgia, serif; font-weight: 400; font-size: 26px; line-height: 1.2; margin: 44px 0 12px; }
+p, li { margin: 0 0 14px; }
+ul { padding-left: 22px; margin: 0 0 14px; }
+a { color: var(--ink); text-underline-offset: 3px; }
+table { width: 100%; border-collapse: collapse; margin: 8px 0 18px; font-size: 15px; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px 10px 0; border-bottom: 1px solid rgba(39, 23, 50, .12); }
+th { font-weight: 500; }
+footer { border-top: 1px solid rgba(39, 23, 50, .12); }
+footer .bar { font-size: 14px; color: var(--muted); flex-wrap: wrap; gap: 8px 20px; }
+@media (max-width: 600px) { body { font-size: 16px; } main { padding-top: 36px; } table, thead, tbody, tr, th, td { display: block; } thead { display: none; } td { border: 0; padding: 2px 0; } tr { border-bottom: 1px solid rgba(39, 23, 50, .12); padding: 10px 0; } }
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="logo" href="../">Fundáro</a><a class="back" href="../">Back to the site</a></div></header>
+<main>
+<h1>Terms of use</h1>
+<p class="updated">Last updated 15 October 2026</p>
+
+<p>These terms apply to your use of this website, operated by SIA "Fundaro", registration number 40203749200, VAT number LV40203749200, LEI 875500YJH4Y0XCESGA65, Ranka dambis 30-130, Riga, LV-1048, Latvia ("Fundaro", "we"). By using the website you accept them.</p>
+
+<h2>1. Information only, not an offer</h2>
+<p>This website gives general information about Fundaro and its activities. It is an advertisement within the meaning of Regulation (EU) 2017/1129. It is not an offer to sell, or an invitation to buy, any financial instrument, and nothing on it is investment, financial, tax or legal advice.</p>
+<p>The bonds are offered solely on the basis of the prospectus of SIA Fundaro dated 29 September 2026, approved by Latvijas Banka on 8 October 2026, together with any supplements. Approval of the prospectus should not be understood as an endorsement of the bonds. Read the prospectus before investing to fully understand the potential risks and rewards of the decision to invest. If anything on this website differs from the prospectus, the prospectus prevails. Information on this website does not form part of the prospectus and has not been reviewed or approved by Latvijas Banka.</p>
+<p>The offer is addressed only to residents of Latvia, Germany and Spain. The information on this website is not directed at persons in any other country where it would be unlawful.</p>
+
+<h2>2. Risk</h2>
+<p>Investing in bonds involves risk. The bonds are unsecured, you could lose all or part of your investment, and they are not covered by any deposit guarantee or investor compensation scheme. Past results and projections are not a reliable indicator of future results.</p>
+
+<h2>3. The waitlist</h2>
+<p>Signing up to the waitlist is free and does not oblige you to invest. A place on the list gives access to the bond platform at the time stated on the website; it does not reserve or guarantee an allocation of bonds. Bonds are allotted as described in the prospectus. We may change the timing of access or close the list, and will tell you by email if that affects you.</p>
+
+<h2>4. Accuracy</h2>
+<p>We take care to keep the website accurate and up to date, but we cannot promise that it is complete, free of errors or available without interruption. Figures, dates and descriptions may change.</p>
+
+<h2>5. Intellectual property</h2>
+<p>The texts, images, videos, logos and design of this website belong to Fundaro or its licensors. You may view and share pages for personal, non-commercial use. Any other use needs our written permission.</p>
+
+<h2>6. Links to other websites</h2>
+<p>Links to other websites, such as Latvijas Banka's register of prospectuses, are given for convenience. We are not responsible for their content.</p>
+
+<h2>7. Liability</h2>
+<p>To the extent the law allows, Fundaro is not liable for any loss arising from the use of this website or from relying on its content. Nothing in these terms limits liability that cannot be limited under applicable law.</p>
+
+<h2>8. Personal data</h2>
+<p>How we handle personal data is explained in our <a href="../privacy-policy/">privacy policy</a>.</p>
+
+<h2>9. Law and disputes</h2>
+<p>These terms are governed by the laws of the Republic of Latvia. Disputes are settled by the courts of Latvia, without affecting any mandatory consumer protection rights you have in the country where you live.</p>
+
+<h2>10. Contact</h2>
+<p>SIA "Fundaro", registration number 40203749200, VAT number LV40203749200, LEI 875500YJH4Y0XCESGA65, Ranka dambis 30-130, Riga, LV-1048, Latvia. Email: <a href="mailto:hi@fundaro.capital">hi@fundaro.capital</a>.</p>
+
+</main>
+<footer><div class="bar"><span>SIA "Fundaro", registration number 40203749200, VAT number LV40203749200, LEI 875500YJH4Y0XCESGA65, Ranka dambis 30-130, Riga, LV-1048, Latvia</span><span><a href="../privacy-policy/">Privacy policy</a> · <a href="../terms/">Terms</a> · <a href="mailto:hi@fundaro.capital">hi@fundaro.capital</a></span></div></footer>
+</body>
+</html>

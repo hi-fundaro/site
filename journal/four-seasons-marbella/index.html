@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script data-fndr="static-host">
+(function(){
+  window.FD_API_BASE="https://fndr.8nomads.com";window.FD_VIDEO_BASE="https://fndr.8nomads.com/v2/assets";window.FD_SITE_BASE="";
+  // Framer CMS byte ranges on a plain file host: fetch the whole file once, hand back the slices asked for
+  var f=window.fetch,cache={};
+  window.fetch=function(u,o){
+    try{
+      var url=new URL(typeof u==="string"?u:u.url,location.href),ranges=url.searchParams.get("range");
+      if(ranges&&/\.framercms$/.test(url.pathname)){
+        var key=url.origin+url.pathname;
+        var p=cache[key]||(cache[key]=f(key).then(function(r){if(!r.ok)throw new Error("cms "+r.status);return r.arrayBuffer()}));
+        return p.then(function(buf){
+          var b=new Uint8Array(buf),parts=[],n=0;
+          ranges.split(",").forEach(function(r){var m=/^(\d+)-(\d+)$/.exec(r);if(!m)throw new Error("bad range");var s=b.subarray(+m[1],+m[2]+1);parts.push(s);n+=s.length});
+          var out=new Uint8Array(n),off=0;parts.forEach(function(s){out.set(s,off);off+=s.length});
+          return new Response(out,{status:200,headers:{"content-type":"application/octet-stream"}})
+        })
+      }
+    }catch(e){}
+    return f.apply(this,arguments)
+  };
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Four Seasons Is Coming to Marbella, and Everything Changes - Fundaro Journal</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="64x64" href="/assets/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#271732">
+<meta name="description" content="Immobel and Fort Partners have full land control for Four Seasons Marbella: 105 keys, 127 branded residences, 750 metres of coastline.">
+<!-- Social graph. Absolute URLs: crawlers do not resolve relative paths.
+     Change the host here if the site is served from anywhere else. -->
+<link rel="canonical" href="https://www.fundaro.capital/journal/four-seasons-marbella/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Fundaro">
+<meta property="og:url" content="https://www.fundaro.capital/journal/four-seasons-marbella/">
+<meta property="og:title" content="Four Seasons Is Coming to Marbella, and Everything Changes - Fundaro Journal">
+<meta property="og:description" content="Immobel and Fort Partners have full land control for Four Seasons Marbella: 105 keys, 127 branded residences, 750 metres of coastline.">
+<meta property="og:image" content="https://www.fundaro.capital/assets/masthead-four-seasons.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="2000">
+<meta property="og:image:height" content="1125">
+<meta property="og:image:alt" content="Restored bedroom in a Malaga residence">
+<meta property="og:locale" content="en_GB">
+<meta property="article:published_time" content="2026-04-29">
+<meta property="article:section" content="Landmark Development">
+<meta property="article:publisher" content="https://www.linkedin.com/company/fundarocapital/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Four Seasons Is Coming to Marbella, and Everything Changes - Fundaro Journal">
+<meta name="twitter:description" content="Immobel and Fort Partners have full land control for Four Seasons Marbella: 105 keys, 127 branded residences, 750 metres of coastline.">
+<meta name="twitter:image" content="https://www.fundaro.capital/assets/masthead-four-seasons.jpg">
+<meta name="twitter:image:alt" content="Restored bedroom in a Malaga residence">
+<!-- The two faces every page opens with. Same origin, but a font preload
+     still needs crossorigin or it is fetched twice. -->
+<link rel="preload" as="font" type="font/woff2" crossorigin
+      href="../../assets/fonts/playfair-display-latin.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin
+      href="../../assets/fonts/optima-nova-regular.woff2">
+<link rel="stylesheet" href="../../styles.css?v=brand1">
+<script>
+/* Opt in to the reveal animations only where they can run and are wanted. */
+if ('IntersectionObserver' in window &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.documentElement.className += ' js';
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://www.fundaro.capital/journal/four-seasons-marbella/#article",
+      "url": "https://www.fundaro.capital/journal/four-seasons-marbella/",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.fundaro.capital/journal/four-seasons-marbella/"
+      },
+      "headline": "Four Seasons Is Coming to Marbella, and Everything Changes",
+      "description": "Immobel and Fort Partners have full land control for Four Seasons Marbella: 105 keys, 127 branded residences, 750 metres of coastline.",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://www.fundaro.capital/assets/masthead-four-seasons.jpg",
+        "width": 2000,
+        "height": 1125
+      },
+      "datePublished": "2026-04-29",
+      "dateModified": "2026-04-29",
+      "articleSection": "Landmark Development",
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://www.fundaro.capital/journal/#blog"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Fundaro Editorial",
+        "url": "https://www.fundaro.capital/"
+      },
+      "publisher": {
+        "@id": "https://www.fundaro.capital/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.fundaro.capital/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Journal",
+          "item": "https://www.fundaro.capital/journal/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Four Seasons Is Coming to Marbella, and Everything Changes",
+          "item": "https://www.fundaro.capital/journal/four-seasons-marbella/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead masthead--article masthead--image">
+  <div class="masthead__bg">
+    <img fetchpriority="high" decoding="async" src="../../assets/masthead-four-seasons.jpg" alt="Bedroom in a restored M&aacute;laga residence">
+  </div>
+
+  <div class="wrap">
+    <nav class="nav" aria-label="Primary">
+      <a class="nav__logo" href="/"><img src="../../assets/logo.svg" alt="Fundaro"></a>
+      <div class="nav__links">
+        <a href="/#services">What we do</a>
+        <a href="/#featured">Where we work</a>
+        <a href="/#our-impact">The company</a>
+        <a href="/#team">Team</a>
+        <a href="/">Journal</a>
+      </div>
+      <a class="btn btn--ghost" href="#updates">Stay in touch</a>
+    </nav>
+
+    <div class="masthead__body">
+      <p class="tag section__eyebrow" data-anim>Landmark Development &middot; April 2026</p>
+      <h1 class="d2" data-anim="lines">Four Seasons Is Coming to Marbella<span class="num">,</span><br>and Everything Changes</h1>
+      <p class="lede masthead__lede" data-anim>The most significant luxury hospitality deal in Costa del Sol history has just closed. Here is what it means for the market, and for you.</p>
+
+      <div class="byline" data-anim>
+        <span class="tag">By Fundaro Editorial</span>
+        <span aria-hidden="true">/</span>
+        <time class="tag" datetime="2026-04-29">29 April 2026</time>
+        <span aria-hidden="true">/</span>
+        <span class="tag">6 min read</span>
+      </div>
+
+      <a class="backlink" href="/" data-anim><span aria-hidden="true">&larr;</span><span>Back to Journal</span></a>
+    </div>
+  </div>
+</header>
+<main id="main">
+
+
+<!-- ============ ARTICLE ============ -->
+<article class="article">
+  <div class="wrap">
+    <div class="prose">
+      <p data-anim>There are moments that mark a market before, and after. The announcement on 29 April 2026 that Belgian listed developer Immobel and Miami-based Fort Partners had secured full land control for the Four Seasons Marbella project is one of those moments.</p>
+      <p data-anim>After nearly a decade of planning, permissions and negotiation, during which the project became something of a local legend, debated in council chambers and whispered about in property circles from Geneva to Riyadh, the deal is done. And its implications ripple far beyond the 32 hectares of beachfront at El Pinar, roughly three kilometres east of Marbella&rsquo;s Old Town.</p>
+      <h2 data-anim="lines">What Has Actually Been Confirmed</h2>
+      <p data-anim>On 29 April 2026, Immobel and Fort Partners announced they had acquired 90 per cent of the land from Marbella businessman Ricardo Arranz. The purchase follows an earlier acquisition of approximately 20,000 square metres from developer Tom&aacute;s Olivo for around <strong>&euro;53 million</strong>. The project now controls roughly 32 hectares of coastal land with approximately <strong>750 metres of direct beachfront access</strong>.</p>
+      <p data-anim>The master plan, shaped by the renowned architecture studio Meier Partners, calls for:</p>
+      <div class="inline-figures" data-stagger>
+        <div data-anim>
+          <p class="inline-figure__v">105</p>
+          <p class="tag inline-figure__l">Four Seasons hotel keys</p>
+        </div>
+        <div data-anim>
+          <p class="inline-figure__v">~127</p>
+          <p class="tag inline-figure__l">Branded residences</p>
+        </div>
+        <div data-anim>
+          <p class="inline-figure__v">2027</p>
+          <p class="tag inline-figure__l">Scheduled sales launch</p>
+        </div>
+      </div>
+      <p data-anim>The 127 residences are divided across approximately 40 apartments, 54 townhouses and 33 villas, a product mix that spans the market from the ultra-high-net-worth villa buyer to the cosmopolitan second-home apartment investor. The project&rsquo;s original budget was cited by Immobel at <strong>&euro;740 million</strong>. Commercialisation of residences is expected to begin in the first half of 2027, with first deliveries anticipated by end-2029 and full project completion projected for 2031-2032.</p>
+      <p data-anim>On 10 February 2026, Marbella Town Hall had already advanced the El Pinar urbanisation scheme, a &euro;9 million infrastructure package covering 26,000 m&sup2; of new roads, pedestrian bridges, A-7 acoustic screens and service road extensions, a critical regulatory milestone that cleared the final bureaucratic path to construction.</p>
+      <figure class="pull" data-anim>A Four Seasons address does not merely denote luxury, it anchors a new benchmark price for every comparable property within a ten-kilometre radius.</figure>
+      <h2 data-anim="lines">Why Branded Residences Are the Smartest Play in 2026</h2>
+      <p data-anim>Branded residences are not merely a lifestyle statement. They are a structural market phenomenon. According to Savills&rsquo; 2025/2026 research, branded residences command a price premium of approximately <strong>25-35 per cent</strong> over comparable non-branded properties, rising to roughly 39 per cent in resort locations. Knight Frank&rsquo;s The Residence Report 2025 forecasts 1,019 branded-residence schemes globally by 2030, up from 611 today and a mere 169 in 2011.</p>
+      <p data-anim>The Costa del Sol&rsquo;s branded pipeline is accelerating. The W/Marriott in Marbella, Marea by Missoni at Finca Cortes&iacute;n, The Summit by Elie Saab and Tierra Viva Lamborghini Villas in Benahav&iacute;s all sit in various stages of development. But Four Seasons, with its unrivalled global reputation and UHNWI clientele, is the anchor that validates the entire corridor.</p>
+      <h3 data-anim>The East Marbella Corridor Effect</h3>
+      <p data-anim>The El Pinar site sits within the R&iacute;o Real to East Marbella corridor, historically undervalued relative to the Golden Mile or Nueva Andaluc&iacute;a. That discount is already compressing. The Elviria micro-market, one kilometre east, recorded price per-square-metre growth of over 20 per cent in 2025 alone. Analysts expect the Four Seasons announcement to accelerate this trend materially.</p>
+      <aside class="callout" data-anim>
+        <p class="tag">For the reader</p>
+        <h2 class="callout__t">What this means for buyers</h2>
+        <p class="note">The Four Seasons residences will not launch pre-sales until 2027. That window, roughly twelve to eighteen months, represents the last opportunity to buy in the surrounding R&iacute;o Real and East Marbella corridor at prices that have not yet fully priced in the Four Seasons effect.</p>
+        <p class="note">Branded-residence buyers who entered comparable projects (Aman Residences in Montenegro, One&amp;Only in Cape Town) in the pre-sales phase consistently saw valuations exceed initial purchase price by 30-50 per cent before delivery. The pattern is well-established. The timing, right now, is the opportunity.</p>
+        <p class="note">At Fundaro, our East Marbella portfolio spans a carefully selected range of properties within the project&rsquo;s influence radius. We advise clients who are considering this corridor to act in 2026, not 2027.</p>
+      </aside>
+
+      <section class="sources" data-anim>
+        <p class="tag">Sources &amp; references</p>
+        <ul>
+          <li><strong>Immobel Press Release, 29 April 2026</strong> Immobel and Fort Partners secure full land-control milestone for Four Seasons Marbella project. <cite>iberian.property</cite></li>
+          <li><strong>Ayuntamiento de Marbella, 10 February 2026</strong> El Ayuntamiento da un paso m&aacute;s para la construcci&oacute;n del hotel Four Seasons con el proyecto de urbanizaci&oacute;n de la zona de El Pinar. <cite>marbella.es</cite></li>
+          <li><strong>Savills, 2025/2026</strong> Branded Residences Report: Global Premium Analysis. <cite>savills.com</cite></li>
+          <li><strong>Knight Frank, 2025</strong> The Residence Report 2025. <cite>knightfrank.com</cite></li>
+          <li><strong>Panorama Marbella, 2026</strong> Four Seasons Marbella: Timeline and Product Overview. <cite>panoramamarbella.com</cite></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</article>
+
+<!-- ============ UPDATES ============ -->
+<section class="courtyard">
+  <div class="wrap courtyard__grid">
+    <div>
+      <h2 class="d2" data-anim="lines">Notes from the site<span class="num">.</span></h2>
+      <p class="lede courtyard__p" data-anim>Occasional writing about the buildings we are working on, the M&aacute;laga market, and how renovation actually goes as opposed to how it was planned.</p>
+      <a class="tlink courtyard__link" href="/" data-anim><span>Read the journal</span><span aria-hidden="true">&rarr;</span></a>
+    </div>
+
+    <div class="signup" id="updates" data-anim>
+      <p class="tag">Company updates</p>
+      <h3 class="d4 signup__t">Take a seat at the courtyard<span class="num">.</span></h3>
+      <p class="note signup__p">Occasional notes from Fundaro, what we are building, where, and what we have learned doing it. A few times a year at most.</p>
+
+      <form class="signup__form" action="#" method="post">
+        <label class="tag" for="email">Email address</label>
+        <div class="signup__row">
+          <input id="email" name="email" type="email" required placeholder="name@example.com" autocomplete="email">
+          <button class="btn btn--dark" type="submit">Keep me updated <span aria-hidden="true">&rarr;</span></button>
+        </div>
+      </form>
+
+      <p class="signup__small">By subscribing you agree to receive occasional updates from Fundaro. Unsubscribe at any time. We do not share your address with anyone.</p>
+
+      <div class="signup__done" role="status" aria-live="polite" hidden>
+        <p class="tag">Confirmation sent &middot; Check your inbox</p>
+        <p class="signup__thanks">Thank you. You will hear from us occasionally, and not often.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div>
+        <div class="footer__logo"><img src="../../assets/logo-dark.svg" alt="Fundaro"></div>
+        <p class="footer__line">The courtyard where capital meets real estate<span class="num">.</span></p>
+        <p class="footer__sub">Residential real estate in M&aacute;laga and southern Spain. SIA &ldquo;Fundaro&rdquo;, Riga and M&aacute;laga.</p>
+      </div>
+
+      <div class="footer__cols">
+        <div>
+          <p class="tag">Company</p>
+          <ul>
+            <li><a href="/#services">What we do</a></li>
+            <li><a href="/#featured">Where we work</a></li>
+            <li><a href="/#our-impact">The company</a></li>
+            <li><a href="/#team">Team</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="tag">More</p>
+          <ul>
+            <li><a href="/">Journal</a></li>
+            <li><a href="#updates">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="tag">Legal</p>
+          <ul>
+            <li><a href="/">Legal notice</a></li>
+            <li><a href="/">Privacy Policy</a></li>
+            <li><a href="/">Cookie Policy</a></li>
+            <li><a href="/">Website terms of use</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <p class="footer__disclaimer">SIA &ldquo;Fundaro&rdquo;, registration number 40203749200, VAT number LV40203749200, LEI 875500YJH4Y0XCESGA65, Ranka dambis 30-130, Riga, LV-1048, Latvia. This website is for general information about the company and its activities. It is not an offer, invitation or inducement to acquire any financial instrument, and nothing on it should be read as financial, investment, tax or legal advice.</p>
+
+    <div class="footer__bot">
+      <p>&copy; 2026 SIA &ldquo;Fundaro&rdquo;. All rights reserved.</p>
+      <p>Riga, Latvia &middot; M&aacute;laga, Spain</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------------------------------------------------------------
+   In-page navigation. Anchor links glide to their section instead of
+   jumping. Links to another page keep their normal behaviour.
+   --------------------------------------------------------------- */
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var frame = 0;
+  var running = false;
+
+  function ease(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  function stop() {
+    running = false;
+    if (frame) cancelAnimationFrame(frame);
+    frame = 0;
+  }
+
+  ['wheel', 'touchstart', 'keydown'].forEach(function (evt) {
+    window.addEventListener(evt, function () { if (running) stop(); }, { passive: true });
+  });
+
+  function positionOf(el) {
+    var margin = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+    var top = el.getBoundingClientRect().top + window.pageYOffset - margin;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    return Math.max(0, Math.min(Math.round(top), Math.round(max)));
+  }
+
+  function glide(to, then) {
+    var from = window.pageYOffset;
+    var delta = to - from;
+    if (!delta) { then(); return; }
+    var duration = Math.min(1300, Math.max(550, Math.abs(delta) * 0.45));
+    var start = performance.now();
+    running = true;
+    frame = requestAnimationFrame(function step(now) {
+      if (!running) return;
+      var p = Math.min(1, (now - start) / duration);
+      window.scrollTo(0, from + delta * ease(p));
+      if (p < 1) { frame = requestAnimationFrame(step); }
+      else { stop(); then(); }
+    });
+  }
+
+  function land(el, href) {
+    if (history.replaceState) history.replaceState(null, '', href);
+    if (!el) return;
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+    el.focus({ preventScroll: true });
+  }
+
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var link = e.target.closest && e.target.closest('a[href]');
+    if (!link) return;
+
+    var href = link.getAttribute('href');
+    if (!href || href.charAt(0) !== '#') return;
+
+    var id = href.slice(1);
+    var el = id ? document.getElementById(id) : null;
+    if (id && !el) return;
+
+    e.preventDefault();
+    stop();
+    var to = el ? positionOf(el) : 0;
+    if (reduce.matches) { window.scrollTo(0, to); land(el, href); return; }
+    glide(to, function () { land(el, href); });
+  });
+})();
+</script>
+
+<script>
+/* ---------------------------------------------------------------
+   Motion. One observer drives every entry animation on the page:
+   an element is revealed the first time it reaches the viewport and
+   is then dropped, so nothing runs on a second pass.
+   --------------------------------------------------------------- */
+(function () {
+  var root = document.documentElement;
+  if (!root.classList.contains('js')) return;
+
+  try {
+    document.querySelectorAll('[data-anim="lines"]').forEach(function (el) {
+      el.innerHTML = el.innerHTML.split(/<br\s*\/?>/i).map(function (line, i) {
+        return '<span class="ln" style="--i:' + i + '"><span>' + line + '</span></span>';
+      /* joined on a space: the <br> is gone once the lines are wrapped, and
+         without it the extracted text reads "real estatein southern" */
+      }).join(' ');
+    });
+
+    document.querySelectorAll('[data-stagger]').forEach(function (group) {
+      Array.prototype.forEach.call(group.children, function (child, i) {
+        child.style.setProperty('--i', i);
+      });
+    });
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -10% 0px' });
+
+    document.querySelectorAll('[data-anim]').forEach(function (el) { io.observe(el); });
+
+    /* the masthead is already on screen: play it on load, not on scroll */
+    requestAnimationFrame(function () {
+      document.querySelectorAll('.masthead [data-anim]').forEach(function (el) {
+        io.unobserve(el);
+        el.classList.add('is-in');
+      });
+    });
+  } catch (err) {
+    root.classList.remove('js');
+  }
+})();
+</script>
+
+<script>
+/* ---------------------------------------------------------------
+   Signup success state. The form has no endpoint yet, so this only
+   swaps the card to its confirmation copy; wire the POST to a real
+   list before launch and move this into its success handler.
+   --------------------------------------------------------------- */
+(function () {
+  document.querySelectorAll('.signup__form').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      /* let the browser say what is wrong with the address */
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      var card = form.closest('.signup');
+      var done = card && card.querySelector('.signup__done');
+      if (!done) return;
+
+      done.hidden = false;
+      void done.offsetWidth;          /* let the hidden state paint once, so it can transition */
+      card.classList.add('is-done');
+      done.setAttribute('tabindex', '-1');
+      done.focus({ preventScroll: true });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head><script data-fndr="static-host">
+(function(){
+  window.FD_API_BASE="https://fndr.8nomads.com";window.FD_VIDEO_BASE="https://fndr.8nomads.com/v2/assets";window.FD_SITE_BASE="";
+  // Framer CMS byte ranges on a plain file host: fetch the whole file once, hand back the slices asked for
+  var f=window.fetch,cache={};
+  window.fetch=function(u,o){
+    try{
+      var url=new URL(typeof u==="string"?u:u.url,location.href),ranges=url.searchParams.get("range");
+      if(ranges&&/\.framercms$/.test(url.pathname)){
+        var key=url.origin+url.pathname;
+        var p=cache[key]||(cache[key]=f(key).then(function(r){if(!r.ok)throw new Error("cms "+r.status);return r.arrayBuffer()}));
+        return p.then(function(buf){
+          var b=new Uint8Array(buf),parts=[],n=0;
+          ranges.split(",").forEach(function(r){var m=/^(\d+)-(\d+)$/.exec(r);if(!m)throw new Error("bad range");var s=b.subarray(+m[1],+m[2]+1);parts.push(s);n+=s.length});
+          var out=new Uint8Array(n),off=0;parts.forEach(function(s){out.set(s,off);off+=s.length});
+          return new Response(out,{status:200,headers:{"content-type":"application/octet-stream"}})
+        })
+      }
+    }catch(e){}
+    return f.apply(this,arguments)
+  };
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy policy · Fundáro</title>
+<meta name="description" content="How SIA Fundaro handles personal data collected through this website.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="../assets/favicon.png">
+<style>
+@font-face { font-family: "Optima nova LT Pro"; src: url("../assets/fonts/optima-nova-regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Optima nova LT Pro"; src: url("../assets/fonts/optima-nova-medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Playfair Display"; src: url("../assets/fonts/playfair-display-latin.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
+:root { --ink: #271732; --cream: #e7ded5; --paper: #f3eee8; --yellow: #feee00; --muted: rgba(39, 23, 50, .72); }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Optima nova LT Pro", Optima, Candara, "Segoe UI", sans-serif; font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+header { position: sticky; top: 0; z-index: 2; background: rgba(243, 238, 232, .82); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(39, 23, 50, .1); }
+.bar { max-width: 860px; margin: 0 auto; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; }
+.logo { font-family: "Playfair Display", Georgia, serif; font-weight: 700; font-size: 26px; color: var(--ink); text-decoration: none; letter-spacing: -.01em; }
+.back { font-size: 15px; color: var(--ink); text-decoration: none; padding: 9px 16px; border-radius: 4px; background: var(--yellow); }
+main { max-width: 860px; margin: 0 auto; padding: 56px 24px 80px; }
+h1 { font-family: "Playfair Display", Georgia, serif; font-weight: 400; font-size: clamp(38px, 6vw, 58px); line-height: 1.05; margin: 0 0 12px; }
+.updated { color: var(--muted); font-size: 15px; margin: 0 0 40px; }
+h2 { font-family: "Playfair Display", Georgia, serif; font-weight: 400; font-size: 26px; line-height: 1.2; margin: 44px 0 12px; }
+p, li { margin: 0 0 14px; }
+ul { padding-left: 22px; margin: 0 0 14px; }
+a { color: var(--ink); text-underline-offset: 3px; }
+table { width: 100%; border-collapse: collapse; margin: 8px 0 18px; font-size: 15px; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px 10px 0; border-bottom: 1px solid rgba(39, 23, 50, .12); }
+th { font-weight: 500; }
+footer { border-top: 1px solid rgba(39, 23, 50, .12); }
+footer .bar { font-size: 14px; color: var(--muted); flex-wrap: wrap; gap: 8px 20px; }
+@media (max-width: 600px) { body { font-size: 16px; } main { padding-top: 36px; } table, thead, tbody, tr, th, td { display: block; } thead { display: none; } td { border: 0; padding: 2px 0; } tr { border-bottom: 1px solid rgba(39, 23, 50, .12); padding: 10px 0; } }
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="logo" href="../">Fundáro</a><a class="back" href="../">Back to the site</a></div></header>
+<main>
+<h1>Privacy policy</h1>
+<p class="updated">Last updated 15 October 2026</p>
+
+<p>This policy explains what personal data SIA "Fundaro" ("Fundaro", "we") collects through this website, why, and what rights you have. We keep it short because we collect very little.</p>
+
+<h2>1. Who is responsible</h2>
+<p>The controller of your personal data is SIA "Fundaro", registration number 40203749200, VAT number LV40203749200, LEI 875500YJH4Y0XCESGA65, Ranka dambis 30-130, Riga, LV-1048, Latvia. For any question about your data, or to use your rights, write to <a href="mailto:hi@fundaro.capital">hi@fundaro.capital</a>.</p>
+
+<h2>2. What we collect and why</h2>
+<table>
+<thead><tr><th>Data</th><th>Purpose</th><th>Legal basis</th></tr></thead>
+<tbody>
+<tr><td>Your email address, the time you signed up, which signup form you used, your place number and your browser language</td><td>To keep your place on the waitlist, send you the access link to the bond platform and news about this offer</td><td>Your consent (Article 6(1)(a) GDPR), given when you submit the form</td></tr>
+<tr><td>A one-way scrambled code made from your IP address (we do not store the IP address itself)</td><td>To stop automated or repeated signups from one connection</td><td>Our legitimate interest in keeping the list accurate and the website secure (Article 6(1)(f) GDPR)</td></tr>
+<tr><td>Technical request data (IP address, browser type, time of request) handled by our hosting provider</td><td>To deliver the website and protect it against abuse</td><td>Our legitimate interest in running a working and secure website (Article 6(1)(f) GDPR)</td></tr>
+<tr><td>Anything you write to us by email</td><td>To answer you</td><td>Our legitimate interest in replying to you, or steps before a contract at your request (Article 6(1)(f) or (b) GDPR)</td></tr>
+</tbody>
+</table>
+<p>We do not use analytics, advertising or tracking tools on this website, and we do not sell or rent your data. We do not use your data for automated decision-making or profiling.</p>
+
+<h2>3. Cookies and storage on your device</h2>
+<p>We use no advertising or analytics cookies. The website only stores small items that make the signup work:</p>
+<ul>
+<li><strong>fd-ea-place</strong> (browser storage): remembers on your device that you have signed up and your place number, so the form is not shown to you again. It stays until you clear your browser data.</li>
+<li><strong>fd_wl_key</strong> (cookie, 60 days): the same purpose on some versions of the signup block.</li>
+</ul>
+<p>These items are strictly necessary for a feature you asked for, so they do not need a separate consent. You can delete them in your browser settings at any time.</p>
+
+<h2>4. Who processes the data for us</h2>
+<ul>
+<li><strong>Cloudflare, Inc.</strong> hosts the website and the signup database. The database is located in Western Europe. Cloudflare is certified under the EU-U.S. Data Privacy Framework and bound by the European Commission's Standard Contractual Clauses for any transfer outside the EU.</li>
+<li><strong>Brevo (Sendinblue SAS, France)</strong> sends our emails once the email service is switched on. Your email address is then also stored with Brevo in the EU.</li>
+</ul>
+<p>Both act only on our instructions under data processing agreements. We may also share data where the law requires it, for example with supervisory authorities.</p>
+
+<h2>5. How long we keep it</h2>
+<p>We keep your email address and signup details until you unsubscribe or ask us to delete them, and in any case no longer than 12 months after the bond offer described in the prospectus has closed. The scrambled IP code is kept with the signup record for the same period. Emails you send us are kept as long as needed to deal with your request.</p>
+
+<h2>6. Your rights</h2>
+<p>You have the right to access your data, have it corrected or deleted, restrict or object to its use, receive it in a portable format, and withdraw your consent at any time without affecting what was done before. Every email we send has an unsubscribe link, or write to <a href="mailto:hi@fundaro.capital">hi@fundaro.capital</a>. We answer within one month.</p>
+<p>You can also complain to the Latvian supervisory authority, the Data State Inspectorate (Datu valsts inspekcija), Elijas iela 17, Riga, LV-1050, <a href="https://www.dvi.gov.lv" rel="noopener">www.dvi.gov.lv</a>, or to the authority in the EU country where you live or work.</p>
+
+<h2>7. Changes</h2>
+<p>We may update this policy when our website or the law changes. The date at the top shows the latest version.</p>
+
+</main>
+<footer><div class="bar"><span>SIA "Fundaro", registration number 40203749200, VAT number LV40203749200, LEI 875500YJH4Y0XCESGA65, Ranka dambis 30-130, Riga, LV-1048, Latvia</span><span><a href="../privacy-policy/">Privacy policy</a> · <a href="../terms/">Terms</a> · <a href="mailto:hi@fundaro.capital">hi@fundaro.capital</a></span></div></footer>
+</body>
+</html>

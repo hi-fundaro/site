@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script data-fndr="static-host">
+(function(){
+  window.FD_API_BASE="https://fndr.8nomads.com";window.FD_VIDEO_BASE="https://fndr.8nomads.com/v2/assets";window.FD_SITE_BASE="";
+  // Framer CMS byte ranges on a plain file host: fetch the whole file once, hand back the slices asked for
+  var f=window.fetch,cache={};
+  window.fetch=function(u,o){
+    try{
+      var url=new URL(typeof u==="string"?u:u.url,location.href),ranges=url.searchParams.get("range");
+      if(ranges&&/\.framercms$/.test(url.pathname)){
+        var key=url.origin+url.pathname;
+        var p=cache[key]||(cache[key]=f(key).then(function(r){if(!r.ok)throw new Error("cms "+r.status);return r.arrayBuffer()}));
+        return p.then(function(buf){
+          var b=new Uint8Array(buf),parts=[],n=0;
+          ranges.split(",").forEach(function(r){var m=/^(\d+)-(\d+)$/.exec(r);if(!m)throw new Error("bad range");var s=b.subarray(+m[1],+m[2]+1);parts.push(s);n+=s.length});
+          var out=new Uint8Array(n),off=0;parts.forEach(function(s){out.set(s,off);off+=s.length});
+          return new Response(out,{status:200,headers:{"content-type":"application/octet-stream"}})
+        })
+      }
+    }catch(e){}
+    return f.apply(this,arguments)
+  };
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marbella&rsquo;s Record Prices, and the Logic Behind Them - Fundaro Journal</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="64x64" href="/assets/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#271732">
+<meta name="description" content="Marbella prime property reached 6,075 euro per square metre in 2026, growing 8.1% against a European average of 3.3%. What is driving it.">
+<!-- Social graph. Absolute URLs: crawlers do not resolve relative paths.
+     Change the host here if the site is served from anywhere else. -->
+<link rel="canonical" href="https://www.fundaro.capital/journal/marbella-record-prices/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Fundaro">
+<meta property="og:url" content="https://www.fundaro.capital/journal/marbella-record-prices/">
+<meta property="og:title" content="Marbella&rsquo;s Record Prices, and the Logic Behind Them - Fundaro Journal">
+<meta property="og:description" content="Marbella prime property reached 6,075 euro per square metre in 2026, growing 8.1% against a European average of 3.3%. What is driving it.">
+<meta property="og:image" content="https://www.fundaro.capital/assets/masthead-record-prices.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1672">
+<meta property="og:image:height" content="941">
+<meta property="og:image:alt" content="Residential building in a central Malaga district">
+<meta property="og:locale" content="en_GB">
+<meta property="article:published_time" content="2026-03-01">
+<meta property="article:section" content="Market Intelligence">
+<meta property="article:publisher" content="https://www.linkedin.com/company/fundarocapital/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Marbella&rsquo;s Record Prices, and the Logic Behind Them - Fundaro Journal">
+<meta name="twitter:description" content="Marbella prime property reached 6,075 euro per square metre in 2026, growing 8.1% against a European average of 3.3%. What is driving it.">
+<meta name="twitter:image" content="https://www.fundaro.capital/assets/masthead-record-prices.jpg">
+<meta name="twitter:image:alt" content="Residential building in a central Malaga district">
+<!-- The two faces every page opens with. Same origin, but a font preload
+     still needs crossorigin or it is fetched twice. -->
+<link rel="preload" as="font" type="font/woff2" crossorigin
+      href="../../assets/fonts/playfair-display-latin.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin
+      href="../../assets/fonts/optima-nova-regular.woff2">
+<link rel="stylesheet" href="../../styles.css?v=brand1">
+<script>
+/* Opt in to the reveal animations only where they can run and are wanted. */
+if ('IntersectionObserver' in window &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.documentElement.className += ' js';
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://www.fundaro.capital/journal/marbella-record-prices/#article",
+      "url": "https://www.fundaro.capital/journal/marbella-record-prices/",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.fundaro.capital/journal/marbella-record-prices/"
+      },
+      "headline": "Marbella's Record Prices, and the Logic Behind Them",
+      "description": "Marbella prime property reached 6,075 euro per square metre in 2026, growing 8.1% against a European average of 3.3%. What is driving it.",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://www.fundaro.capital/assets/masthead-record-prices.jpg",
+        "width": 1672,
+        "height": 941
+      },
+      "datePublished": "2026-03-01",
+      "dateModified": "2026-03-01",
+      "articleSection": "Market Intelligence",
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://www.fundaro.capital/journal/#blog"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Fundaro Editorial",
+        "url": "https://www.fundaro.capital/"
+      },
+      "publisher": {
+        "@id": "https://www.fundaro.capital/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.fundaro.capital/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Journal",
+          "item": "https://www.fundaro.capital/journal/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Marbella's Record Prices, and the Logic Behind Them",
+          "item": "https://www.fundaro.capital/journal/marbella-record-prices/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead masthead--article masthead--image">
+  <div class="masthead__bg">
+    <img fetchpriority="high" decoding="async" src="../../assets/masthead-record-prices.jpg" alt="Residential building in a central M&aacute;laga district">
+  </div>
+
+  <div class="wrap">
+    <nav class="nav" aria-label="Primary">
+      <a class="nav__logo" href="/"><img src="../../assets/logo.svg" alt="Fundaro"></a>
+      <div class="nav__links">
+        <a href="/#services">What we do</a>
+        <a href="/#featured">Where we work</a>
+        <a href="/#our-impact">The company</a>
+        <a href="/#team">Team</a>
+        <a href="/">Journal</a>
+      </div>
+      <a class="btn btn--ghost" href="#updates">Stay in touch</a>
+    </nav>
+
+    <div class="masthead__body">
+      <p class="tag section__eyebrow" data-anim>Market Intelligence &middot; Q1 2026</p>
+      <h1 class="d2" data-anim="lines">Marbella&rsquo;s Record Prices<span class="num">,</span><br>and the Logic Behind Them</h1>
+      <p class="lede masthead__lede" data-anim>At &euro;6,075 per square metre and an 8.1% annual gain, Marbella prime real estate is outperforming nearly every European benchmark. Here is what is driving it, and where the ceiling is.</p>
+
+      <div class="byline" data-anim>
+        <span class="tag">By Fundaro Editorial</span>
+        <span aria-hidden="true">/</span>
+        <time class="tag" datetime="2026-03-01">March 2026</time>
+        <span aria-hidden="true">/</span>
+        <span class="tag">7 min read</span>
+      </div>
+
+      <a class="backlink" href="/" data-anim><span aria-hidden="true">&larr;</span><span>Back to Journal</span></a>
+    </div>
+  </div>
+</header>
+<main id="main">
+
+
+<!-- ============ ARTICLE ============ -->
+<article class="article">
+  <div class="wrap">
+    <div class="prose">
+      <p data-anim>In January 2026, Marbella&rsquo;s average asking price hit &euro;6,075 per square metre, a new all-time record according to idealista data. That figure represents a 5.38 per cent year-on-year increase, and it sits on top of a previous record of &euro;5,162 per square metre set in May 2025. In the space of eight months, the city&rsquo;s prime market moved the needle by nearly a thousand euros per square metre.</p>
+      <p data-anim>But the headline number understates the reality at the top of the market. In Los Monteros, one of Marbella&rsquo;s most coveted residential addresses, the asking price per square metre reached &euro;8,772 in February 2026. And Villa Bellagio in Sierra Blanca, currently Spain&rsquo;s most expensive listing, is priced at &euro;70 million.</p>
+      <div class="inline-figures" data-stagger>
+        <div data-anim>
+          <p class="inline-figure__v">&euro;6,075</p>
+          <p class="tag inline-figure__l">Marbella average asking price / m&sup2;</p>
+        </div>
+        <div data-anim>
+          <p class="inline-figure__v">8.1%</p>
+          <p class="tag inline-figure__l">Prime price growth, Marbella 2025</p>
+        </div>
+        <div data-anim>
+          <p class="inline-figure__v">&euro;8,772</p>
+          <p class="tag inline-figure__l">Los Monteros price / m&sup2;</p>
+        </div>
+      </div>
+      <h2 data-anim="lines">A European Outlier</h2>
+      <p data-anim>Context matters. Knight Frank&rsquo;s Wealth Report 2026, reported by Euronews in May 2026, ranked Marbella prime residential growth at <strong>8.1 per cent</strong> in 2025, against a European prime average of just 3.3 per cent. London prime fell 4.7 per cent over the same period. Frankfurt prime dropped 5.2 per cent. Paris held roughly flat.</p>
+      <p data-anim>Marbella&rsquo;s closest European comparators in growth terms were Prague (+14.6 per cent), M&eacute;ribel (+9 per cent) and Porto (+8.5 per cent), all markets with either severe supply constraints or extraordinary demand surges. In Marbella, both are present simultaneously.</p>
+      <figure class="pull" data-anim>When London prime falls and Marbella prime rises, the message from global capital is unambiguous: the Costa del Sol has graduated to a different class of market.</figure>
+      <h2 data-anim="lines">The Wider Costa del Sol Picture</h2>
+      <p data-anim>Marbella is not moving in isolation. The Golden Triangle of Marbella, Estepona and Benahav&iacute;s recorded 8,708 sales in 2024, up 31.42 per cent on 2019 levels. Each municipality is setting its own records:</p>
+      <h3 data-anim>Estepona</h3>
+      <p data-anim>New-build prices at the close of 2025 reached &euro;7,000 per square metre in premium schemes along the New Golden Mile. Tyrian Residences&rsquo; &ldquo;Melkart&rdquo; penthouse closed at <strong>&euro;8 million</strong> in January 2026, the most expensive apartment sale in Estepona&rsquo;s recorded history.</p>
+      <h3 data-anim>Benahav&iacute;s</h3>
+      <p data-anim>Average asking prices reached approximately <strong>&euro;5,205 per square metre</strong>. La Zagaleta, the ultra-exclusive gated estate within the municipality, topped idealista&rsquo;s 2025 ranking of Spain&rsquo;s most expensive streets, with average listings above &euro;12 million.</p>
+      <h3 data-anim>The Macro Tailwind</h3>
+      <p data-anim>Spain as a whole recorded 714,237 home sales in 2025, the highest in 18 years, with prices rising 12.7 per cent year-on-year according to the INE, the steepest annual gain since 2007. The Costa del Sol, with its premium on supply-constrained beachfront land and a buyer pool drawn from across four continents, is consistently outpacing the national average.</p>
+      <h2 data-anim="lines">Understanding the Asking-Price Gap</h2>
+      <p data-anim>A note of precision for the analytically minded buyer: there is a meaningful gap between asking prices and verified sale prices. Tinsa&rsquo;s transaction data, drawn from completed, notarised sales, shows an average of approximately <strong>&euro;3,421 per square metre</strong> across the Marbella market. The spread between asking and completion reflects the negotiating dynamics of a market where international buyers, unfamiliar with local convention, often pay closer to asking than domestic buyers would.</p>
+      <p data-anim>In prime sub-markets, Sierra Blanca, Puente Romano, Los Monteros, that gap narrows considerably, with competitive bidding on best-in-class product regularly driving final prices above asking. Understanding which sub-markets exhibit which dynamics is, in large part, what a well-connected Marbella advisor is for.</p>
+      <aside class="callout" data-anim>
+        <p class="tag">For the reader</p>
+        <h2 class="callout__t">What this means for buyers</h2>
+        <p class="note">The data points in one direction: supply of prime, beachfront or golf-adjacent land in Marbella is not growing. The municipal coastline is fixed. That structural scarcity, combined with accelerating international demand, makes the medium-term price trajectory clear.</p>
+        <p class="note">For buyers considering entry, the question is not whether to buy, but where and when within the market cycle. The 2025-2026 window, prior to the Four Seasons&rsquo; 2027 pre-sales launch and subsequent repricing of the entire east corridor, is increasingly understood by sophisticated investors as the final opportunity to buy at pre-catalyst prices.</p>
+        <p class="note">Fundaro&rsquo;s advisory service provides granular sub-market analysis, distinguishing between asking-price theatre and genuine value creation, for clients who expect precision, not property brochures.</p>
+      </aside>
+
+      <section class="sources" data-anim>
+        <p class="tag">Sources &amp; references</p>
+        <ul>
+          <li><strong>Idealista, January to March 2026</strong> Marbella asking price data and historical records. <cite>idealista.com</cite></li>
+          <li><strong>Knight Frank / Euronews, May 2026</strong> Wealth Report 2026: PIRI 100 European Prime Residential Index. <cite>knightfrank.com</cite></li>
+          <li><strong>TINSA, 2025/2026</strong> Verified residential transaction prices, M&aacute;laga province. <cite>tinsa.es</cite></li>
+          <li><strong>DM Properties, 2025/2026</strong> Marbella Property Market Price Trends. <cite>dmproperties.com</cite></li>
+          <li><strong>INE (Instituto Nacional de Estad&iacute;stica), 2026</strong> Annual Residential Property Transaction and Price Statistics 2025. <cite>ine.es</cite></li>
+          <li><strong>Panorama Marbella</strong> Marbella Property Market Report 2026. <cite>panoramamarbella.com</cite></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</article>
+
+<!-- ============ UPDATES ============ -->
+<section class="courtyard">
+  <div class="wrap courtyard__grid">
+    <div>
+      <h2 class="d2" data-anim="lines">Notes from the site<span class="num">.</span></h2>
+      <p class="lede courtyard__p" data-anim>Occasional writing about the buildings we are working on, the M&aacute;laga market, and how renovation actually goes as opposed to how it was planned.</p>
+      <a class="tlink courtyard__link" href="/" data-anim><span>Read the journal</span><span aria-hidden="true">&rarr;</span></a>
+    </div>
+
+    <div class="signup" id="updates" data-anim>
+      <p class="tag">Company updates</p>
+      <h3 class="d4 signup__t">Take a seat at the courtyard<span class="num">.</span></h3>
+      <p class="note signup__p">Occasional notes from Fundaro, what we are building, where, and what we have learned doing it. A few times a year at most.</p>
+
+      <form class="signup__form" action="#" method="post">
+        <label class="tag" for="email">Email address</label>
+        <div class="signup__row">
+          <input id="email" name="email" type="email" required placeholder="name@example.com" autocomplete="email">
+          <button class="btn btn--dark" type="submit">Keep me updated <span aria-hidden="true">&rarr;</span></button>
+        </div>
+      </form>
+
+      <p class="signup__small">By subscribing you agree to receive occasional updates from Fundaro. Unsubscribe at any time. We do not share your address with anyone.</p>
+
+      <div class="signup__done" role="status" aria-live="polite" hidden>
+        <p class="tag">Confirmation sent &middot; Check your inbox</p>
+        <p class="signup__thanks">Thank you. You will hear from us occasionally, and not often.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div>
+        <div class="footer__logo"><img src="../../assets/logo-dark.svg" alt="Fundaro"></div>
+        <p class="footer__line">The courtyard where capital meets real estate<span class="num">.</span></p>
+        <p class="footer__sub">Residential real estate in M&aacute;laga and southern Spain. SIA &ldquo;Fundaro&rdquo;, Riga and M&aacute;laga.</p>
+      </div>
+
+      <div class="footer__cols">
+        <div>
+          <p class="tag">Company</p>
+          <ul>
+            <li><a href="/#services">What we do</a></li>
+            <li><a href="/#featured">Where we work</a></li>
+            <li><a href="/#our-impact">The company</a></li>
+            <li><a href="/#team">Team</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="tag">More</p>
+          <ul>
+            <li><a href="/">Journal</a></li>
+            <li><a href="#updates">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="tag">Legal</p>
+          <ul>
+            <li><a href="/">Legal notice</a></li>
+            <li><a href="/">Privacy Policy</a></li>
+            <li><a href="/">Cookie Policy</a></li>
+            <li><a href="/">Website terms of use</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <p class="footer__disclaimer">SIA &ldquo;Fundaro&rdquo;, registration number 40203749200, VAT number LV40203749200, LEI 875500YJH4Y0XCESGA65, Ranka dambis 30-130, Riga, LV-1048, Latvia. This website is for general information about the company and its activities. It is not an offer, invitation or inducement to acquire any financial instrument, and nothing on it should be read as financial, investment, tax or legal advice.</p>
+
+    <div class="footer__bot">
+      <p>&copy; 2026 SIA &ldquo;Fundaro&rdquo;. All rights reserved.</p>
+      <p>Riga, Latvia &middot; M&aacute;laga, Spain</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------------------------------------------------------------
+   In-page navigation. Anchor links glide to their section instead of
+   jumping. Links to another page keep their normal behaviour.
+   --------------------------------------------------------------- */
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var frame = 0;
+  var running = false;
+
+  function ease(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  function stop() {
+    running = false;
+    if (frame) cancelAnimationFrame(frame);
+    frame = 0;
+  }
+
+  ['wheel', 'touchstart', 'keydown'].forEach(function (evt) {
+    window.addEventListener(evt, function () { if (running) stop(); }, { passive: true });
+  });
+
+  function positionOf(el) {
+    var margin = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+    var top = el.getBoundingClientRect().top + window.pageYOffset - margin;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    return Math.max(0, Math.min(Math.round(top), Math.round(max)));
+  }
+
+  function glide(to, then) {
+    var from = window.pageYOffset;
+    var delta = to - from;
+    if (!delta) { then(); return; }
+    var duration = Math.min(1300, Math.max(550, Math.abs(delta) * 0.45));
+    var start = performance.now();
+    running = true;
+    frame = requestAnimationFrame(function step(now) {
+      if (!running) return;
+      var p = Math.min(1, (now - start) / duration);
+      window.scrollTo(0, from + delta * ease(p));
+      if (p < 1) { frame = requestAnimationFrame(step); }
+      else { stop(); then(); }
+    });
+  }
+
+  function land(el, href) {
+    if (history.replaceState) history.replaceState(null, '', href);
+    if (!el) return;
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+    el.focus({ preventScroll: true });
+  }
+
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var link = e.target.closest && e.target.closest('a[href]');
+    if (!link) return;
+
+    var href = link.getAttribute('href');
+    if (!href || href.charAt(0) !== '#') return;
+
+    var id = href.slice(1);
+    var el = id ? document.getElementById(id) : null;
+    if (id && !el) return;
+
+    e.preventDefault();
+    stop();
+    var to = el ? positionOf(el) : 0;
+    if (reduce.matches) { window.scrollTo(0, to); land(el, href); return; }
+    glide(to, function () { land(el, href); });
+  });
+})();
+</script>
+
+<script>
+/* ---------------------------------------------------------------
+   Motion. One observer drives every entry animation on the page:
+   an element is revealed the first time it reaches the viewport and
+   is then dropped, so nothing runs on a second pass.
+   --------------------------------------------------------------- */
+(function () {
+  var root = document.documentElement;
+  if (!root.classList.contains('js')) return;
+
+  try {
+    document.querySelectorAll('[data-anim="lines"]').forEach(function (el) {
+      el.innerHTML = el.innerHTML.split(/<br\s*\/?>/i).map(function (line, i) {
+        return '<span class="ln" style="--i:' + i + '"><span>' + line + '</span></span>';
+      /* joined on a space: the <br> is gone once the lines are wrapped, and
+         without it the extracted text reads "real estatein southern" */
+      }).join(' ');
+    });
+
+    document.querySelectorAll('[data-stagger]').forEach(function (group) {
+      Array.prototype.forEach.call(group.children, function (child, i) {
+        child.style.setProperty('--i', i);
+      });
+    });
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -10% 0px' });
+
+    document.querySelectorAll('[data-anim]').forEach(function (el) { io.observe(el); });
+
+    /* the masthead is already on screen: play it on load, not on scroll */
+    requestAnimationFrame(function () {
+      document.querySelectorAll('.masthead [data-anim]').forEach(function (el) {
+        io.unobserve(el);
+        el.classList.add('is-in');
+      });
+    });
+  } catch (err) {
+    root.classList.remove('js');
+  }
+})();
+</script>
+
+<script>
+/* ---------------------------------------------------------------
+   Signup success state. The form has no endpoint yet, so this only
+   swaps the card to its confirmation copy; wire the POST to a real
+   list before launch and move this into its success handler.
+   --------------------------------------------------------------- */
+(function () {
+  document.querySelectorAll('.signup__form').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      /* let the browser say what is wrong with the address */
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      var card = form.closest('.signup');
+      var done = card && card.querySelector('.signup__done');
+      if (!done) return;
+
+      done.hidden = false;
+      void done.offsetWidth;          /* let the hidden state paint once, so it can transition */
+      card.classList.add('is-done');
+      done.setAttribute('tabindex', '-1');
+      done.focus({ preventScroll: true });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

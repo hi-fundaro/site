@@ -1,0 +1,371 @@
+/* Fundaro brand layer over the Framer "Homy" export.
+   Palette and type from the Fundaro style guide (fundaro.capital, Figma xktVM5MqH1jj7szPnYYGMg).
+   Loaded last in <head>, so it wins over the Framer styles without editing the generated CSS. */
+
+:root {
+  --ink: #271732;        /* deep aubergine, primary dark */
+  --cream: #e7ded5;      /* warm light band */
+  --paper: #e7ded5;      /* page background */
+  --yellow: #feee00;     /* accent, primary button */
+  --graphite: #271732;   /* body text on light */
+  --card-cream: #dbd3ca; /* cards */
+  --muted: #271732;      /* secondary text */
+  --display: 'Playfair Display', Didot, 'Bodoni 72', Georgia, serif;
+  --body: 'Optima nova LT Pro', 'Optima nova', Optima, Candara, 'Gill Sans', sans-serif;
+}
+
+@font-face { font-family: 'Playfair Display'; src: url('/assets/fonts/playfair-display-latin.woff2') format('woff2');
+  font-weight: 400 900; font-style: normal; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Playfair Display'; src: url('/assets/fonts/playfair-display-latin-ext.woff2') format('woff2');
+  font-weight: 400 900; font-style: normal; font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Optima nova LT Pro'; src: url('/assets/fonts/optima-nova-regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Optima nova LT Pro'; src: url('/assets/fonts/optima-nova-medium.woff2') format('woff2'); font-weight: 500 600; font-display: swap; }
+@font-face { font-family: 'Optima nova LT Pro'; src: url('/assets/fonts/optima-nova-bold.woff2') format('woff2'); font-weight: 700 900; font-display: swap; }
+
+body { background: var(--paper) !important; }
+
+/* ---------- type: Optima for everything, Playfair for headings and display numbers ---------- */
+#main, #main * { font-family: var(--body) !important; }
+#main h1, #main h2, #main h3, #main h4,
+#main h1 *, #main h2 *, #main h3 *, #main h4 *,
+#main [data-framer-name^="Staggered Countdown"] *,
+#main [data-framer-name="About Text Reveal"] * {
+  font-family: var(--display) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.018em !important;
+}
+#main [data-framer-name="About Text Reveal"] * { font-style: normal !important; line-height: 1.15em !important; }
+#main h5, #main h5 * { font-family: var(--display) !important; font-weight: 400 !important; letter-spacing: -0.01em !important; }
+#main h6, #main h6 * { font-weight: 500 !important; letter-spacing: 0.02em !important; }
+#main [data-framer-name$="Label"] h6 { letter-spacing: 0.04em !important; }
+#main p { word-break: normal !important; }
+
+/* ---------- buttons: yellow primary, ink text ---------- */
+#main [data-framer-name="Main/Black"] { background-color: var(--yellow) !important; box-shadow: none !important; }
+#main [data-framer-name="Main/Black"] p, #main [data-framer-name="Main/Black"] .framer-text { color: var(--ink) !important; --framer-text-color: var(--ink) !important; }
+/* Fundaro buttons carry a bare arrow, not an arrow in a box */
+#main [data-framer-name="Main/Black"] [data-framer-name="Arrow"] { background-color: transparent !important; }
+
+/* ---------- skies: the template's blue sky photos, warmed to the Fundaro palette ---------- */
+#main [data-framer-name="Footer"] [data-framer-name="Cloud Image"] img { filter: grayscale(1) sepia(0.3) brightness(1.12) contrast(0.9); }
+
+/* ---------- highlighted section: Fundaro photo instead of the template video ---------- */
+#main [data-framer-name="Video Player"] { background: url('/assets/asset-1.jpg') center / cover no-repeat !important; }
+#main [data-framer-name="Video Player"] video:not(.fd-mp4) { visibility: hidden !important; }
+#main [data-framer-name="Video Player"] video.fd-mp4 { visibility: visible !important; z-index: 1; }
+
+/* ---------- corners: Fundaro uses 5px, not pill-soft cards ---------- */
+#main [data-framer-name="Property Card"], #main [data-framer-name="Property card"],
+#main [data-framer-name="Stats Card 1"], #main [data-framer-name="Stats Card 2"], #main [data-framer-name="Stats Card 3"],
+#main [data-framer-name="Left Image"], #main [data-framer-name="Right Image"],
+#main [data-framer-name="Main/Black"], #main [data-framer-name="Secondary"] { border-radius: 5px !important; }
+
+/* ---------- template bits with no Fundaro equivalent ---------- */
+#main [data-framer-name="Pattern Image"],
+#main [data-framer-name="Social Icons"],
+#main [data-framer-name="Quote"],
+#main [data-framer-name="number + sqft"],
+#main [data-framer-name="Details"],
+#main [data-framer-name="Footer"] [data-framer-name="Icon wwrapper"],
+#main [data-framer-name="Property Status"] svg { display: none !important; }
+/* the template's "Crafted by" credit now carries the Riga · Málaga line: no logo, no link */
+#main a[href*="?ref="], #main a[target="_blank"][href="/"] { pointer-events: none !important; cursor: default !important; }
+#main a[href*="?ref="] svg, #main a[target="_blank"][href="/"] svg { display: none !important; }
+#main [data-framer-name="Featured"] [data-framer-name="Explore Button"],
+#main [data-framer-name="Featured"] [data-framer-name="Secondary"],
+#main [data-framer-name="Featured"] a[href*="properties"] { display: none !important; }
+/* listing / featured cards would open template property pages */
+#main a[href*="/properties/"], #main a[href^="./properties/"] { pointer-events: none !important; cursor: default !important; }
+
+/* ---------- legal strip after the footer ---------- */
+.fd-legal { background: var(--paper); color: var(--graphite); font-family: var(--body); }
+.fd-legal { padding: 24px 72px 40px; }
+.fd-legal p { max-width: 1296px; margin: 0 auto 12px; font-size: 13px; line-height: 1.6; }
+.fd-legal p:last-child { margin-bottom: 0; }
+@media (max-width: 809px) { .fd-legal { padding: 20px 20px 32px; } }
+.fd-legal a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.fd-legal a:hover { color: var(--ink); }
+
+/* ---------- team grid (replaces the template's review slider) ---------- */
+#team [data-framer-name="Ticker Container"] { display: none !important; }
+#fd-team { order: 9; width: 100%; align-self: stretch; margin-top: 48px; }
+.fd-team__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; max-width: 1080px; margin: 0 auto; }
+.fd-member { all: unset; box-sizing: border-box; cursor: pointer; display: flex; flex-direction: column;
+  background: var(--card-cream); border-radius: 5px; overflow: hidden; text-align: left;
+  transition: transform .25s ease, box-shadow .25s ease; }
+.fd-member:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(39, 23, 50, .10); }
+.fd-member:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.fd-member__photo { display: block; aspect-ratio: 9 / 10; overflow: hidden; background: var(--cream); }
+.fd-member__photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; transform: scale(1.05); transform-origin: center 30%; transition: transform .4s ease; }
+.fd-member:hover .fd-member__photo img { transform: scale(1.09); }
+.fd-member__body { display: flex; flex-direction: column; gap: 6px; padding: 20px 22px 24px; flex: 1; }
+#main .fd-member__name { font-family: var(--display) !important; font-size: 26px; line-height: 1.15; letter-spacing: -0.01em; color: var(--ink); }
+#main .fd-member__role { font-family: var(--body) !important; font-weight: 500; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+#main .fd-member__bio { font-family: var(--body) !important; font-size: 15px; line-height: 1.55; color: var(--graphite); margin-top: 6px; }
+#main .fd-member__more { font-family: var(--body) !important; font-size: 14px; color: var(--ink); margin-top: auto; padding-top: 12px; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 809px) {
+  #fd-team { margin-top: 32px; }
+  .fd-team__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .fd-member__photo { aspect-ratio: 1 / 1; }
+  .fd-member__body { padding: 12px 14px 16px; gap: 4px; }
+  #main .fd-member__name { font-size: 18px; }
+  #main .fd-member__role { font-size: 10px; letter-spacing: .1em; }
+  #main .fd-member__bio { display: none; }
+  #main .fd-member__more { font-size: 13px; padding-top: 8px; }
+}
+
+/* enlarged profile */
+html.fd-modal-open { overflow: hidden; }
+.fd-modal { position: fixed; inset: 0; z-index: 2147483000; display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; transition: opacity .2s ease; }
+.fd-modal[hidden] { display: none; }
+.fd-modal.is-open { opacity: 1; }
+.fd-modal__backdrop { position: absolute; inset: 0; background: rgba(39, 23, 50, .78); }
+.fd-modal__panel { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); width: 100%; max-width: 900px;
+  max-height: calc(100vh - 48px); background: var(--paper); border-radius: 5px; overflow: hidden;
+  transform: translateY(12px) scale(.98); transition: transform .25s ease; font-family: var(--body); color: var(--graphite); }
+.fd-modal.is-open .fd-modal__panel { transform: none; }
+.fd-modal__photo { background: var(--cream); min-height: 0; }
+.fd-modal__photo { overflow: hidden; }
+.fd-modal__photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; transform: scale(1.05); transform-origin: center 30%; }
+.fd-modal__text { display: flex; flex-direction: column; gap: 14px; padding: 48px 44px 36px; overflow: auto; }
+.fd-modal__role { margin: 0; font-weight: 500; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.fd-modal__name { margin: 0; font-family: var(--display); font-weight: 400; font-size: 44px; line-height: 1.05; letter-spacing: -0.018em; color: var(--ink); }
+.fd-modal__bio { margin: 0; font-size: 18px; line-height: 1.6; }
+.fd-modal__in { align-self: flex-start; color: var(--ink); font-size: 16px; text-underline-offset: 3px; }
+.fd-modal__in[hidden] { display: none; }
+.fd-modal__nav { display: flex; align-items: center; gap: 14px; margin-top: auto; padding-top: 18px; font-size: 13px; color: var(--muted); }
+.fd-modal__nav button, .fd-modal__close { all: unset; box-sizing: border-box; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border: 1px solid rgba(39, 23, 50, .25); border-radius: 5px; color: var(--ink); font-size: 18px; background: var(--paper); }
+.fd-modal__nav button:hover, .fd-modal__close:hover { background: var(--yellow); border-color: var(--yellow); }
+.fd-modal__nav button:focus-visible, .fd-modal__close:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.fd-modal__close { position: absolute; top: 14px; right: 14px; z-index: 1; font-size: 24px; }
+@media (max-width: 809px) {
+  .fd-modal { padding: 12px; align-items: flex-end; }
+  .fd-modal__panel { grid-template-columns: 1fr; max-height: calc(100vh - 24px); overflow: auto; }
+  .fd-modal__photo { aspect-ratio: 9 / 10; max-height: 52vh; }
+  .fd-modal__text { padding: 24px 22px 22px; overflow: visible; }
+  .fd-modal__name { font-size: 32px; }
+  .fd-modal__bio { font-size: 16px; }
+}
+
+/* ---------- Fundaro palette: four colours only ----------
+   Ground #E7DED5, Primary #271732, Accent #FEEE00, Black #000000 (type & depth).
+   Surfaces that used to be a second cream now sit one step deeper on the ground (5% black over the ground). */
+:root { --depth: #dbd3ca; }
+#main [data-framer-name^="Stats Card"],
+#main [data-framer-name="About Section"],
+#main [style*="background-color:var(--token-b7f282c5"], #main [style*="background-color: var(--token-b7f282c5"],
+#main [style*="background-color:var(--token-76f192a4"], #main [style*="background-color: var(--token-76f192a4"] {
+  background-color: var(--depth) !important; }
+
+/* ---------- mobile navigation: constant glass, sliding panel, two-line burger ---------- */
+@media (max-width: 809px) {
+  nav[data-framer-name="Mobileclosed"], nav[data-framer-name="Mobile Open"],
+  nav[data-framer-name="Mobile White close"], nav[data-framer-name="Mobile White open"] {
+    transition: background-color .35s ease !important; }
+  /* open: always frosted, whatever the inline animation left behind */
+  nav[data-framer-name="Mobile Open"], nav[data-framer-name="Mobile White open"] {
+    -webkit-backdrop-filter: blur(18px) saturate(1.5) !important; backdrop-filter: blur(18px) saturate(1.5) !important;
+    background-color: rgba(231, 222, 213, .72) !important;
+    animation: fd-nav-in .45s cubic-bezier(.2, .7, .2, 1) both; }
+  /* closed: clear at the top of the page, lightly frosted once scrolled */
+  nav[data-framer-name="Mobileclosed"] {
+    -webkit-backdrop-filter: blur(0px) !important; backdrop-filter: blur(0px) !important;
+    background-color: rgba(231, 222, 213, 0) !important; }
+  html.fd-scrolled nav[data-framer-name="Mobileclosed"], nav[data-framer-name="Mobile White close"] {
+    -webkit-backdrop-filter: blur(14px) saturate(1.4) !important; backdrop-filter: blur(14px) saturate(1.4) !important;
+    background-color: rgba(231, 222, 213, .6) !important; }
+  /* the link panel slides down and fades in */
+  nav[data-framer-name="Mobile Open"] [data-framer-name="Mobile Expanded"],
+  nav[data-framer-name="Mobile White open"] [data-framer-name="Mobile Expanded"] {
+    animation: fd-menu-in .5s cubic-bezier(.2, .7, .2, 1) .08s both; }
+  @keyframes fd-nav-in { from { max-height: 78px; } to { max-height: 600px; } }
+  @keyframes fd-menu-in { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
+  /* closing (fd-nav.js adds .fd-closing, then switches the variant): the panel slides back up and the glass clears */
+  nav.fd-closing [data-framer-name="Mobile Expanded"] { animation: fd-menu-out .3s cubic-bezier(.4, 0, .6, 1) both !important; }
+  nav.fd-closing { animation: fd-nav-out .32s cubic-bezier(.4, 0, .6, 1) both !important; }
+  @keyframes fd-menu-out { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-14px); } }
+  @keyframes fd-nav-out { from { max-height: 600px; } to { max-height: 78px; } }
+  /* burger: two lines when closed; Framer turns them into the X on tap */
+  [data-framer-name="Open"] > [data-framer-name="line2"] { display: none !important; }
+  [data-framer-name="Open"] > [data-framer-name="line3"] { top: 10px !important; }
+  [data-framer-name="Open"] > [data-framer-name="line 1"] { bottom: 9px !important; }
+  @media (prefers-reduced-motion: reduce) {
+    nav[data-framer-name="Mobile Open"], nav[data-framer-name="Mobile White open"],
+    nav[data-framer-name="Mobile Open"] [data-framer-name="Mobile Expanded"], nav[data-framer-name="Mobile White open"] [data-framer-name="Mobile Expanded"] { animation: none; } }
+}
+
+/* ---------- CTA buttons: one radius, one colour swap, one arrow nudge, both ways ---------- */
+#main a.framer-UH9OL.framer-v-1onicqi, #main a.framer-UH9OL.framer-v-9e28cn {
+  border-radius: 5px !important; box-shadow: none !important;
+  transition: background-color .32s cubic-bezier(.2, .7, .2, 1), transform .32s cubic-bezier(.2, .7, .2, 1) !important; }
+#main a.framer-UH9OL.framer-v-1onicqi p, #main a.framer-UH9OL.framer-v-9e28cn p { transition: color .32s cubic-bezier(.2, .7, .2, 1); }
+/* primary: yellow -> purple with yellow type */
+#main a.framer-UH9OL.framer-v-1onicqi:hover, #main a.framer-UH9OL.framer-v-1onicqi.hover { background-color: var(--ink) !important; transform: translateY(-1px); }
+#main a.framer-UH9OL.framer-v-1onicqi:hover p, #main a.framer-UH9OL.framer-v-1onicqi.hover p,
+#main a.framer-UH9OL.framer-v-1onicqi:hover .framer-text, #main a.framer-UH9OL.framer-v-1onicqi.hover .framer-text { color: var(--yellow) !important; --framer-text-color: var(--yellow) !important; }
+/* arrow: a single glyph that nudges right; the template's sliding duplicate and grey pill are dropped */
+#main a.framer-UH9OL.framer-v-1onicqi [data-framer-name="Arrow"] { background: transparent !important; border-radius: 0 !important; overflow: visible !important;
+  transition: transform .32s cubic-bezier(.2, .7, .2, 1); }
+#main a.framer-UH9OL.framer-v-1onicqi:hover [data-framer-name="Arrow"], #main a.framer-UH9OL.framer-v-1onicqi.hover [data-framer-name="Arrow"] { transform: translateX(4px); }
+#main a.framer-UH9OL.framer-v-1onicqi [data-framer-name="Arrow"] svg.framer-ym3l0a { display: none !important; }
+#main a.framer-UH9OL.framer-v-1onicqi [data-framer-name="Arrow"] svg.framer-1st4uer { position: static !important; top: auto !important; right: auto !important; left: auto !important;
+  opacity: 1 !important; transform: none !important; --21h8s6: var(--ink) !important; color: var(--ink); transition: color .32s ease, filter .32s ease; }
+#main a.framer-UH9OL.framer-v-1onicqi:hover [data-framer-name="Arrow"] svg.framer-1st4uer, #main a.framer-UH9OL.framer-v-1onicqi.hover [data-framer-name="Arrow"] svg.framer-1st4uer { --21h8s6: var(--yellow) !important; color: var(--yellow); }
+/* secondary: outline -> filled purple with light type */
+#main a.framer-UH9OL.framer-v-9e28cn { background-color: transparent !important; --border-color: var(--ink) !important; }
+#main a.framer-UH9OL.framer-v-9e28cn:hover, #main a.framer-UH9OL.framer-v-9e28cn.hover { background-color: var(--ink) !important; transform: translateY(-1px); }
+#main a.framer-UH9OL.framer-v-9e28cn:hover p, #main a.framer-UH9OL.framer-v-9e28cn.hover p,
+#main a.framer-UH9OL.framer-v-9e28cn:hover .framer-text, #main a.framer-UH9OL.framer-v-9e28cn.hover .framer-text { color: var(--cream) !important; --framer-text-color: var(--cream) !important; }
+@media (prefers-reduced-motion: reduce) { #main a.framer-UH9OL.framer-v-1onicqi, #main a.framer-UH9OL.framer-v-9e28cn, #main a.framer-UH9OL.framer-v-1onicqi [data-framer-name="Arrow"] { transition: none !important; } }
+
+/* ---------- section order: the About statement follows the hero; "Our Impact" (The company) moves down before the team ----------
+   Done with flex order so the DOM (and React hydration) stays untouched. */
+body { display: flex; flex-direction: column; }
+#our-impact { order: 1; }
+#team, #team ~ section, footer { order: 2; }
+.fd-legal { order: 3; }
+
+/* ---------- clouds over the house: the hero is sticky and the next section slides over it.
+   The cloud layers that did this lived at the top of "Our Impact"; now that section sits lower, the same two
+   layers are drawn at the top of the About statement, which follows the hero. ---------- */
+[data-framer-name="About Section"] { overflow: visible !important; }
+[data-framer-name="About Section"]::before, [data-framer-name="About Section"]::after {
+  content: ""; position: absolute; left: -32px; right: -33px; height: 464px; z-index: 0; pointer-events: none;
+  background: url("/framerusercontent.com/images/C2ebO7rPg1aRgfSeP2BBMcx45A.png") center / cover no-repeat; }
+[data-framer-name="About Section"]::before, [data-framer-name="About Section"]::after { will-change: transform; transform: translateZ(0); backface-visibility: hidden; }
+[data-framer-name="About Section"]::before { top: -130px; }
+[data-framer-name="About Section"]::after { top: -260px; }
+[data-framer-name="About Section"] > * { position: relative; z-index: 1; }
+/* in its new place "Our Impact" would push clouds over the section above it; keep that effect for the hero only */
+#our-impact [data-framer-name="Cloud Image"] { display: none !important; }
+
+/* the About statement sits on white so the house, the white clouds and the text read as one continuous transition */
+#main [data-framer-name="About Section"] { background-color: #ffffff !important; }
+#main [data-framer-name="About Section"] [data-framer-name="Background Pattern Wrap"] { display: none !important; }
+/* "Where we work" section: no section tag above the heading */
+#main [data-framer-name="Signature Property Section"] [data-framer-name="Section Tag"] { display: none !important; }
+
+/* ---------- "Why Málaga" cards: text only, no numerals ---------- */
+#main [data-framer-name="Signature Property Section"] [data-framer-name="Price Wrapper"] { display: none !important; }
+
+/* ---------- highlighted section: Vimeo loop in place of the template video ---------- */
+#main [data-framer-name="Video Player"] { position: relative; overflow: hidden !important; }
+#main [data-framer-name="Video Player"] { aspect-ratio: 16 / 9 !important; height: auto !important; }
+#main [data-framer-name="Video Player"] .fd-vimeo, #main [data-framer-name="Video Player"] .fd-mp4 { position: absolute; top: 0; left: 0; border: 0; pointer-events: none; background: transparent; object-fit: cover; display: block; }
+
+/* ---------- section order (replaces the earlier block): hero, About, Why Málaga cards, ticker + video,
+   What we do, How we work, Our entity, The company, team, FAQ, journal, footer ---------- */
+#services, [data-framer-name="Property Listing Section"] { order: 1; }
+#our-impact { order: 2; }
+#team, #team ~ section, footer { order: 3; }
+.fd-legal { order: 4; }
+
+/* ---------- "Why Málaga" cards: text block centred in the frosted panel, heading max two lines ---------- */
+#main [data-framer-name="Signature Property Section"] [data-framer-name="Content Wrapper"] {
+  align-items: center !important; justify-content: center !important; text-align: center;
+  padding: 44px 48px !important; width: min(620px, calc(100vw - 40px)) !important; max-width: calc(100vw - 40px) !important;
+  box-sizing: border-box !important; gap: 0 !important; }
+#main [data-framer-name="Signature Property Section"] [data-framer-name="Content Wrapper"] > [class*="-container"] { display: none !important; }
+#main [data-framer-name="Signature Property Section"] [data-framer-name="Text Wrapper"] { align-items: center !important; text-align: center; width: 100% !important; gap: 14px !important; }
+#main [data-framer-name="Signature Property Section"] [data-framer-name="Text Wrapper"] h4 {
+  font-size: 40px !important; line-height: 1.15 !important; letter-spacing: -0.018em !important; text-align: center !important; text-wrap: balance; }
+#main [data-framer-name="Signature Property Section"] [data-framer-name="Text Wrapper"] p { text-align: center !important; text-wrap: balance; }
+@media (max-width: 1199px) { #main [data-framer-name="Signature Property Section"] [data-framer-name="Text Wrapper"] h4 { font-size: 34px !important; } }
+@media (max-width: 809px)  {
+  #main [data-framer-name="Signature Property Section"] [data-framer-name="Content Wrapper"] { padding: 28px 24px !important; }
+  #main [data-framer-name="Signature Property Section"] [data-framer-name="Text Wrapper"] { gap: 10px !important; }
+  #main [data-framer-name="Signature Property Section"] [data-framer-name="Text Wrapper"] h4 { font-size: 26px !important; } }
+
+/* ---------- team profile modal: several paragraphs, the first as a lead line ---------- */
+.fd-modal__bio { display: flex; flex-direction: column; gap: 14px; }
+.fd-modal__bio p { margin: 0; font-size: 16px; line-height: 1.6; }
+.fd-modal__bio p.fd-modal__lead { font-family: var(--display); font-size: 22px; line-height: 1.35; letter-spacing: -0.01em; color: var(--ink); }
+@media (max-width: 809px) { .fd-modal__bio p { font-size: 15px; } .fd-modal__bio p.fd-modal__lead { font-size: 19px; } }
+
+/* ---------- profile modal on phones: plain stacked layout (iOS Safari mis-sized the grid row of an
+   aspect-ratio photo with max-height, so the photo spilled over the text) ---------- */
+@media (max-width: 809px) {
+  .fd-modal__panel { display: block !important; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+  .fd-modal__photo { position: relative; display: block; width: 100%; height: min(50vh, 105vw); max-height: none; aspect-ratio: auto; overflow: hidden; isolation: isolate; }
+  .fd-modal__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; transform: none !important; }
+  .fd-modal__text { display: flex; position: relative; }
+  .fd-modal__close { position: fixed; top: 22px; right: 22px; z-index: 5; background: var(--paper); box-shadow: 0 4px 14px rgba(39, 23, 50, .18); }
+}
+
+/* ---------- desktop navigation: the same glass as on phones, clear at the top of the page, frosted once scrolled ---------- */
+@media (min-width: 810px) {
+  nav[data-framer-name="Desktop"] { transition: background-color .35s ease, -webkit-backdrop-filter .35s ease, backdrop-filter .35s ease !important; }
+  html.fd-scrolled nav[data-framer-name="Desktop"] {
+    -webkit-backdrop-filter: blur(14px) saturate(1.4) !important; backdrop-filter: blur(14px) saturate(1.4) !important;
+    background-color: rgba(231, 222, 213, .6) !important; }
+}
+
+/* ---------- footer: no journal teaser, no oversized wordmark, no journal link; text clear of the photo ---------- */
+footer [data-framer-name="CTA Wrapper"], footer [data-framer-name="Logo Container"], footer [data-framer-name="Navigation Item 3"] { display: none !important; }
+footer [data-framer-name="Content Section"] { padding-top: 72px !important; padding-bottom: 8px !important; }
+@media (max-width: 809px) { footer [data-framer-name="Content Section"] { padding-top: 48px !important; } }
+
+/* ---------- menu button: countdown to Group 1 access next to the arrow (fd-nav.js) ---------- */
+/* the page's own label ("Journal") is never shown: not before the script runs, nor while React re-renders the button */
+nav a.framer-UH9OL > :not(.fd-navcd):not(.framer-cidclt) { display: none !important; }
+nav a.framer-UH9OL { width: auto !important; }
+.fd-navcd { display: inline-block; white-space: nowrap; font-family: var(--body); font-size: 16px; line-height: 1;
+  color: var(--ink); font-variant-numeric: lining-nums tabular-nums; }
+/* hovered, the button turns purple (same as the other primary buttons): light text */
+nav a.framer-UH9OL:hover .fd-navcd, nav a.framer-UH9OL.hover .fd-navcd { color: var(--cream); }
+
+/* ---------- no "bullet + label" section tags above headings (TEAM, QUESTIONS, ...): the heading says it already ---------- */
+#main [data-framer-name="Section Tag"] { display: none !important; }
+
+/* ---------- hero: one button. Desktop "Fundáro Team"; phones show the countdown in its place (fd-nav.js) ---------- */
+main#hero [class*="-container"]:has(> a.framer-UH9OL.framer-v-9e28cn) { display: none !important; }
+@media (min-width: 810px) { main#hero a.framer-UH9OL > .fd-navcd { display: none !important; } }
+@media (max-width: 809px) {
+  main#hero a.framer-UH9OL > :not(.fd-navcd):not(.framer-cidclt) { display: none !important; }
+  main#hero a.framer-UH9OL { width: auto !important; }
+}
+main#hero a.framer-UH9OL:hover .fd-navcd, main#hero a.framer-UH9OL.hover .fd-navcd { color: var(--cream); }
+
+/* ---------- phones: the countdown docks in the menu bar, the wordmark shrinks (fd-nav.js) ---------- */
+@media (max-width: 809px) {
+  /* wordmark: two sizes, swapped behind a short fade (fd-nav.js adds .fd-logo-fade, then toggles .fd-small) */
+  /* Framer writes opacity: 1 inline on the wordmark, so the fade needs !important to win */
+  /* Framer writes transform: none inline on a freshly rendered bar, so the size needs !important as well */
+  nav[data-framer-name^="Mobile"] a.framer-uZg3F { transform-origin: left center !important; transition: opacity .26s ease !important; }
+  nav.fd-small a.framer-uZg3F { transform: scale(.62) !important; }
+  nav.fd-logo-fade a.framer-uZg3F { opacity: 0 !important; }
+  /* the phone menu has no countdown button: the docked one in the bar does that job */
+  nav [data-framer-name="Mobile Expanded"] [class*="-container"]:has(> a.framer-UH9OL) { display: none !important; }
+  /* the docked countdown slides in from above the screen and back out the same way (no fade) */
+  #fd-pin { position: fixed; left: 50%; top: 18px; z-index: 2147481000; display: inline-flex; align-items: center; gap: 10px;
+    padding: 0 14px; height: 40px; border-radius: 4px; background: var(--yellow); color: var(--ink); text-decoration: none;
+    font-family: var(--body); font-size: 14px; line-height: 1; font-variant-numeric: lining-nums tabular-nums; white-space: nowrap;
+    pointer-events: none; transform: translate(-50%, -110px); transition: transform .55s cubic-bezier(.2, .7, .2, 1); will-change: transform; }
+  #fd-pin.is-docked { pointer-events: auto; transform: translate(-50%, 0); }
+  #fd-pin::after { content: "\2192"; font-size: 15px; }
+  #fd-pin .fd-navcd { font-size: 14px; }
+  #fd-pin:empty { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { #fd-pin { transition: none; } }
+
+/* ---------- footer "Details" and "Company" extras (fd-nav.js) ---------- */
+footer [data-framer-name="Right Info Stack"] > :not(.fd-foot) { display: none !important; }   /* the page's own lines */
+.fd-foot, .fd-foot-nav { display: flex; flex-direction: column; gap: 22px; font-family: var(--body); font-size: 14px; line-height: 1.2; white-space: nowrap; }
+.fd-foot a, .fd-foot span, .fd-foot-nav a { color: var(--cream); text-decoration: none; transition: color .2s ease; }
+.fd-foot a:hover, .fd-foot-nav a:hover { color: var(--yellow); }
+/* the footer wordmark is an SVG that the export renders "pixelated" */
+footer [data-framer-component-type="SVG"] { image-rendering: auto !important; }
+.fd-foot-tm { margin: 14px 0 0; font-family: var(--body); font-size: 14px; line-height: 1.6; color: var(--cream); }
+@media (max-width: 809px) { .fd-foot-tm { font-size: 12px; } }
+@media (max-width: 809px) { .fd-foot, .fd-foot-nav { gap: 22px; font-size: 12px; } }   /* same step as the page's own items (36px) */
+
+/* the section tag component ("Dark" variant: dot + label) on any remaining section, e.g. QUESTIONS */
+#main [class*="-container"]:has(> [data-framer-name="Dark"] > [data-framer-name="Icon Wrapper"]) { display: none !important; }
+/* phones: the footer photo starts at the top of the footer card, without the cloud strip above it */
+@media (max-width: 809px) {
+  footer [data-framer-name="Content Area"] { padding-top: 0 !important; }
+  footer [data-framer-name="Cloud Image"] { display: none !important; }
+}

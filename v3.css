@@ -1,0 +1,53 @@
+/* Styles for the page without Framer (fd-fx.js does the behaviour). Everything else comes from the export's own CSS. */
+
+/* ---- appear: Framer left these at opacity .001 for its appear animation; fd-fx.js reveals them in view */
+.fd-in { opacity: 1 !important; transform: none !important; transition: opacity .7s cubic-bezier(.2, .7, .2, 1), transform .7s cubic-bezier(.2, .7, .2, 1) !important; }
+/* the word spans of the text reveals: revealed by fd-fx.js with a short stagger */
+.fd-word { opacity: 1 !important; transform: none !important; transition: opacity .5s ease, transform .5s ease !important; }
+/* the About text: blurred words sharpen one by one as the section scrolls (colour and blur in the span's own style) */
+.fd-sharp { filter: blur(0px) !important; color: var(--token-bef40d4c-c8ef-4925-b8ff-fc7817829d8b, rgb(11, 17, 23)) !important; }
+
+/* ---- hero: no filter over the whole sticky section (brightness 1.03 / contrast 1.05 cost a full re-raster of the
+   smoke, the house and the text on every scroll frame on phones; the difference is not visible) */
+main#hero { filter: none !important; -webkit-filter: none !important; }
+main#hero [data-framer-name="Content Wrapper"] { will-change: transform, opacity; }
+
+/* ---- hero smoke and house: moved by fd-fx.js through CSS variables, so their own transforms stay intact */
+main#hero [data-framer-name="Hero Smoke Image"] { transform: var(--fd-smoke-base, none) translateX(var(--fd-smoke-x, 0px)) !important; }
+main#hero [data-framer-name="Home Image"] { transform: translateY(var(--fd-para-y, 0px)) !important; }
+main#hero [data-framer-name="Content Wrapper"] { transform: translateY(var(--fd-cw-y, 0px)) scale(var(--fd-cw-s, 1)) !important; opacity: var(--fd-cw-o, 1) !important; }
+
+/* ---- the rolling "Acquire · Renovate · Sell" line (Framer's ticker ran in JavaScript; phones keep it hidden) */
+@media (min-width: 810px) {
+  [data-framer-name="Ticker Container"] ul { opacity: 1 !important; animation: fd-ticker var(--fd-tick-dur, 8s) linear infinite; }
+  @keyframes fd-ticker { from { transform: translateX(0); } to { transform: translateX(calc(-1 * var(--fd-tick, 644px))); } }
+  @media (prefers-reduced-motion: reduce) { [data-framer-name="Ticker Container"] ul { animation: none; } }
+}
+
+/* ---- video zoom (desktop and tablet; phones keep the box as it is) */
+@media (min-width: 810px) {
+  [data-framer-name="Highlighted Home Section"] [data-framer-name="Center Container"] { transform: perspective(1200px) scale(var(--fd-zoom, 1)) !important; }
+}
+
+/* ---- FAQ accordion: the export's own variant classes give the closed (1px) and open (auto) answer height */
+.framer-mciAD { cursor: pointer; }
+.framer-mciAD .framer-1gyl0eb { transition: height .35s cubic-bezier(.2, .7, .2, 1), opacity .3s ease; }
+.framer-mciAD.framer-v-1ejrpwo .framer-1gyl0eb { opacity: 1 !important; }
+.framer-mciAD .framer-1gyl0eb > div { transition: opacity .3s ease; }
+.framer-mciAD.framer-v-1bas7dc .framer-1gyl0eb > div { opacity: 0; }
+.framer-mciAD .framer-60dmnl { transition: transform .35s cubic-bezier(.2, .7, .2, 1); transform: rotate(180deg); }
+.framer-mciAD.framer-v-1bas7dc .framer-60dmnl { transform: rotate(270deg); }
+.framer-mciAD:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+
+/* ---- phone menu: the expanded part is in the DOM; shown by the open variant class on the bar (fd-fx.js) */
+nav.framer-v-m2kqe8 .framer-iluino { display: none; }
+nav.framer-v-1kfaa0s .framer-iluino { display: flex; }
+/* the hamburger lines: open = X (the export only positions them; the turn is ours) */
+nav .framer-LqZWJ [data-framer-name="line3"], nav .framer-LqZWJ [data-framer-name="line 1"], nav .framer-LqZWJ [data-framer-name="line2"] { transition: transform .3s ease, opacity .2s ease; }
+nav .framer-LqZWJ.framer-v-qk9xot [data-framer-name="line3"] { transform: rotate(45deg) !important; }
+nav .framer-LqZWJ.framer-v-qk9xot [data-framer-name="line 1"] { transform: rotate(-45deg) !important; }
+nav .framer-LqZWJ.framer-v-qk9xot [data-framer-name="line2"] { opacity: 0 !important; }
+
+/* ---- hover states Framer used to switch with JavaScript */
+footer [data-framer-name="Progress Bar"] [data-framer-name="Fill"] { transition: opacity .25s ease, transform .3s ease; }
+footer a:hover [data-framer-name="Progress Bar"] [data-framer-name="Fill"] { opacity: 1 !important; }

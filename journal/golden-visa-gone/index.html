@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script data-fndr="static-host">
+(function(){
+  window.FD_API_BASE="https://fndr.8nomads.com";window.FD_VIDEO_BASE="https://fndr.8nomads.com/v2/assets";window.FD_SITE_BASE="";
+  // Framer CMS byte ranges on a plain file host: fetch the whole file once, hand back the slices asked for
+  var f=window.fetch,cache={};
+  window.fetch=function(u,o){
+    try{
+      var url=new URL(typeof u==="string"?u:u.url,location.href),ranges=url.searchParams.get("range");
+      if(ranges&&/\.framercms$/.test(url.pathname)){
+        var key=url.origin+url.pathname;
+        var p=cache[key]||(cache[key]=f(key).then(function(r){if(!r.ok)throw new Error("cms "+r.status);return r.arrayBuffer()}));
+        return p.then(function(buf){
+          var b=new Uint8Array(buf),parts=[],n=0;
+          ranges.split(",").forEach(function(r){var m=/^(\d+)-(\d+)$/.exec(r);if(!m)throw new Error("bad range");var s=b.subarray(+m[1],+m[2]+1);parts.push(s);n+=s.length});
+          var out=new Uint8Array(n),off=0;parts.forEach(function(s){out.set(s,off);off+=s.length});
+          return new Response(out,{status:200,headers:{"content-type":"application/octet-stream"}})
+        })
+      }
+    }catch(e){}
+    return f.apply(this,arguments)
+  };
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Golden Visa Is Gone. Why International Buyers Are Still Here. - Fundaro Journal</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="64x64" href="/assets/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#271732">
+<meta name="description" content="Spain ended its property golden visa in April 2025. A year on, foreign buyers took 42.5% of all Malaga transactions - a record.">
+<!-- Social graph. Absolute URLs: crawlers do not resolve relative paths.
+     Change the host here if the site is served from anywhere else. -->
+<link rel="canonical" href="https://www.fundaro.capital/journal/golden-visa-gone/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Fundaro">
+<meta property="og:url" content="https://www.fundaro.capital/journal/golden-visa-gone/">
+<meta property="og:title" content="The Golden Visa Is Gone. Why International Buyers Are Still Here. - Fundaro Journal">
+<meta property="og:description" content="Spain ended its property golden visa in April 2025. A year on, foreign buyers took 42.5% of all Malaga transactions - a record.">
+<meta property="og:image" content="https://www.fundaro.capital/assets/masthead-golden-visa.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1672">
+<meta property="og:image:height" content="941">
+<meta property="og:image:alt" content="Restored kitchen in a Malaga residence">
+<meta property="og:locale" content="en_GB">
+<meta property="article:published_time" content="2026-05-01">
+<meta property="article:section" content="Policy &amp; Demand">
+<meta property="article:publisher" content="https://www.linkedin.com/company/fundarocapital/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Golden Visa Is Gone. Why International Buyers Are Still Here. - Fundaro Journal">
+<meta name="twitter:description" content="Spain ended its property golden visa in April 2025. A year on, foreign buyers took 42.5% of all Malaga transactions - a record.">
+<meta name="twitter:image" content="https://www.fundaro.capital/assets/masthead-golden-visa.jpg">
+<meta name="twitter:image:alt" content="Restored kitchen in a Malaga residence">
+<!-- The two faces every page opens with. Same origin, but a font preload
+     still needs crossorigin or it is fetched twice. -->
+<link rel="preload" as="font" type="font/woff2" crossorigin
+      href="../../assets/fonts/playfair-display-latin.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin
+      href="../../assets/fonts/optima-nova-regular.woff2">
+<link rel="stylesheet" href="../../styles.css?v=brand1">
+<script>
+/* Opt in to the reveal animations only where they can run and are wanted. */
+if ('IntersectionObserver' in window &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.documentElement.className += ' js';
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://www.fundaro.capital/journal/golden-visa-gone/#article",
+      "url": "https://www.fundaro.capital/journal/golden-visa-gone/",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.fundaro.capital/journal/golden-visa-gone/"
+      },
+      "headline": "The Golden Visa Is Gone. Why International Buyers Are Still Here.",
+      "description": "Spain ended its property golden visa in April 2025. A year on, foreign buyers took 42.5% of all Malaga transactions - a record.",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://www.fundaro.capital/assets/masthead-golden-visa.jpg",
+        "width": 1672,
+        "height": 941
+      },
+      "datePublished": "2026-05-01",
+      "dateModified": "2026-05-01",
+      "articleSection": "Policy & Demand",
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://www.fundaro.capital/journal/#blog"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Fundaro Editorial",
+        "url": "https://www.fundaro.capital/"
+      },
+      "publisher": {
+        "@id": "https://www.fundaro.capital/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.fundaro.capital/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Journal",
+          "item": "https://www.fundaro.capital/journal/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "The Golden Visa Is Gone. Why International Buyers Are Still Here.",
+          "item": "https://www.fundaro.capital/journal/golden-visa-gone/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead masthead--article masthead--image">
+  <div class="masthead__bg">
+    <img fetchpriority="high" decoding="async" src="../../assets/masthead-golden-visa.jpg" alt="Restored kitchen in a M&aacute;laga residence">
+  </div>
+
+  <div class="wrap">
+    <nav class="nav" aria-label="Primary">
+      <a class="nav__logo" href="/"><img src="../../assets/logo.svg" alt="Fundaro"></a>
+      <div class="nav__links">
+        <a href="/#services">What we do</a>
+        <a href="/#featured">Where we work</a>
+        <a href="/#our-impact">The company</a>
+        <a href="/#team">Team</a>
+        <a href="/">Journal</a>
+      </div>
+      <a class="btn btn--ghost" href="#updates">Stay in touch</a>
+    </nav>
+
+    <div class="masthead__body">
+      <p class="tag section__eyebrow" data-anim>Policy &amp; Demand &middot; 2025-2026</p>
+      <h1 class="d2" data-anim="lines">The Golden Visa Is Gone.<br>Why International Buyers<br>Are Still Here.</h1>
+      <p class="lede masthead__lede" data-anim>Spain abolished its property golden visa in April 2025. The world was watching. Twelve months on, the verdict is in, and it is not what the pessimists predicted.</p>
+
+      <div class="byline" data-anim>
+        <span class="tag">By Fundaro Editorial</span>
+        <span aria-hidden="true">/</span>
+        <time class="tag" datetime="2026-05-01">May 2026</time>
+        <span aria-hidden="true">/</span>
+        <span class="tag">7 min read</span>
+      </div>
+
+      <a class="backlink" href="/" data-anim><span aria-hidden="true">&larr;</span><span>Back to Journal</span></a>
+    </div>
+  </div>
+</header>
+<main id="main">
+
+
+<!-- ============ ARTICLE ============ -->
+<article class="article">
+  <div class="wrap">
+    <div class="prose">
+      <p data-anim>On 3 April 2025, Spain&rsquo;s property-based golden visa officially ended. Under Organic Law 1/2025 (BOE-A-2025-76), non-EU nationals could no longer acquire residency by purchasing Spanish property above &euro;500,000. Housing Minister Isabel Rodr&iacute;guez framed the decision as a matter of social equity, addressing &ldquo;price tensions and a lack of residential supply&rdquo; in specific urban areas.</p>
+      <p data-anim>For observers of the Costa del Sol market, the question was immediate: would this trigger a retreat of the international buyers who have underpinned the market&rsquo;s extraordinary decade of growth?</p>
+      <p data-anim>Twelve months later, the answer is a clear and data-backed no.</p>
+      <h2 data-anim="lines">The Numbers That Did Not Collapse</h2>
+      <p data-anim>In 2025, foreigners purchased 97,500 homes across Spain, a 13.82 per cent share of all transactions, the highest on record. In the first half of 2025 alone, international buyers completed 71,155 purchases, 19.3 per cent of all sales, and the first time since late 2022 that the six-month figure exceeded 70,000.</p>
+      <div class="inline-figures" data-stagger>
+        <div data-anim>
+          <p class="inline-figure__v">97,500</p>
+          <p class="tag inline-figure__l">Foreign home purchases in Spain 2025</p>
+        </div>
+        <div data-anim>
+          <p class="inline-figure__v">42.5%</p>
+          <p class="tag inline-figure__l">Foreign buyer share, M&aacute;laga province</p>
+        </div>
+        <div data-anim>
+          <p class="inline-figure__v">84.3%</p>
+          <p class="tag inline-figure__l">Foreign buyer share, Benahav&iacute;s</p>
+        </div>
+      </div>
+      <p data-anim>In M&aacute;laga province, where the Costa del Sol sits, foreign buyers accounted for 42.5 per cent of all 35,780 residential transactions in 2025, exactly 15,242 sales. That figure is more than double both the regional and national foreign market share averages. In Marbella specifically, foreign buyers represented approximately 62 per cent of 4,322 total sales. In Estepona, 70.8 per cent. In Benahav&iacute;s, where the property market is essentially an international luxury market that happens to be governed by a Spanish municipality, the foreign buyer share reached an extraordinary <strong>84.3 per cent</strong>.</p>
+      <h2 data-anim="lines">Why the Golden Visa Was Always a Side Story</h2>
+      <p data-anim>The data, once examined, reveals that the golden visa was never the structural driver of Costa del Sol demand. Between 2013 and 2025, approximately 16,000 total golden visas were issued across all of Spain. Of these, 14,576 were property-linked over the 2013 to 2023 period, peaking at 3,270 in 2023. Foreign property purchases above the &euro;500,000 threshold represented just 9.71 per cent of all foreign buys in 2023, or roughly 8,500 units nationally. In Marbella, golden-visa-linked purchases accounted for an estimated 7.1 per cent of transactions.</p>
+      <p data-anim>The remaining 92.9 per cent were buying for other reasons entirely: lifestyle, climate, cultural quality, education access, safety, long-term capital preservation and, increasingly, the recognition that Marbella offers a standard of living that simply cannot be replicated at comparable price points anywhere on the Mediterranean.</p>
+      <figure class="pull" data-anim>People do not move their families and their capital to Marbella because of a visa programme. They do it because Marbella is, by almost every measure, one of the finest places on earth to live. The golden visa was administrative convenience, not motivation.</figure>
+      <h2 data-anim="lines">Who Is Buying Now</h2>
+      <p data-anim>The buyer profile in 2025-2026 is both broader and wealthier than at any previous point in the market&rsquo;s recorded history. American buyers, Italian buyers, Moroccan buyers, Dutch buyers and Portuguese buyers all reached record transaction levels in 2025. British buyers, long the dominant foreign force on the Costa del Sol, remain the single largest national group, absorbing post-Brexit complexity with characteristic pragmatism.</p>
+      <h3 data-anim>The American Arrival</h3>
+      <p data-anim>Perhaps the most significant structural shift is the emergence of American buyers as a meaningful market force. Historically a rare presence in European residential markets outside Paris and Tuscany, US buyers discovered Marbella during the post-pandemic period and have not left. The combination of dollar strength relative to the euro, Marbella&rsquo;s improving international school infrastructure, and the lifestyle proposition has created a genuinely new demand cohort that operates entirely independently of any visa framework.</p>
+      <h3 data-anim>Middle Eastern Capital</h3>
+      <p data-anim>Gulf-region buyers, predominantly from Saudi Arabia, the UAE and Qatar, have increasingly identified Marbella as a European lifestyle complement to their primary residences. The Puente Romano, the Marbella Club and the Golden Mile&rsquo;s ultra-prime villas have long accommodated this clientele, but the profile is expanding, with younger, family-oriented buyers now looking beyond the Golden Mile toward Benahav&iacute;s and the east coast corridor.</p>
+      <h2 data-anim="lines">Tourism as a Leading Indicator</h2>
+      <p data-anim>The Costa del Sol welcomed 14.65 million visitors in 2025, generating &euro;21.8 billion in tourism revenue, both all-time records. M&aacute;laga Costa del Sol airport processed <strong>26.8 million passengers</strong>, up 7.4 per cent year-on-year. Marbella&rsquo;s hotel average daily rate hit <strong>&euro;395 in August 2025</strong>, the highest of any Spanish destination. Hotel investment in M&aacute;laga province reached &euro;309 million.</p>
+      <p data-anim>Luxury tourism is the canary in the coal mine of luxury residential demand. The two consistently move together, with a lag of roughly eighteen to thirty-six months as visitors-turned-buyers progress from discovery through contemplation to transaction. By that metric, the record tourism figures of 2025 suggest that residential transaction volumes are set to remain elevated through at least 2027.</p>
+      <aside class="callout" data-anim>
+        <p class="tag">For the reader</p>
+        <h2 class="callout__t">What this means for buyers</h2>
+        <p class="note">The abolition of the golden visa has, paradoxically, clarified the investment thesis. What remains is pure demand, buyers who want to be here, full stop. That is a structurally healthier market than one partially sustained by visa incentives, and it is the kind of demand that supports sustained price appreciation rather than policy-driven volatility.</p>
+        <p class="note">For international buyers who had delayed a purchase pending clarity on the post-golden-visa landscape, the twelve-month picture is now definitive. The market has absorbed the policy change without disruption. If anything, the removal of a programme that primarily benefited non-luxury buyers below the &euro;500,000 threshold has concentrated the prime market&rsquo;s attention on exactly the kind of exceptional property that Fundaro specialises in.</p>
+        <p class="note">The conditions, record demand, constrained supply, the Four Seasons catalyst ahead, are as compelling as they have ever been. The question is not whether to act, but what to act on.</p>
+      </aside>
+
+      <section class="sources" data-anim>
+        <p class="tag">Sources &amp; references</p>
+        <ul>
+          <li><strong>BOE-A-2025-76 (Bolet&iacute;n Oficial del Estado)</strong> Ley Org&aacute;nica 1/2025 abolishing the property-based golden visa, effective 3 April 2025. <cite>boe.es</cite></li>
+          <li><strong>Colegio de Registradores de Espa&ntilde;a, 2024/2025</strong> Estad&iacute;stica Registral Inmobiliaria: foreign buyer transaction data by nationality and province. <cite>registradores.org</cite></li>
+          <li><strong>Idealista, April 2025</strong> Spain&rsquo;s golden visa: numbers, impact and abolition analysis. <cite>idealista.com</cite></li>
+          <li><strong>The Property Finders, 2025/2026</strong> M&aacute;laga foreign buyer share analysis: 42.5% and municipal breakdown. <cite>thepropertyfinders.com</cite></li>
+          <li><strong>INE (Instituto Nacional de Estad&iacute;stica), 2026</strong> Residential transaction statistics 2025: 714,237 sales, 12.7% price growth. <cite>ine.es</cite></li>
+          <li><strong>Junta de Andaluc&iacute;a / Costa del Sol Tourism, 2025/2026</strong> Annual visitor and revenue statistics, M&aacute;laga province. <cite>juntadeandalucia.es</cite></li>
+          <li><strong>Colegio de Notarios, 2025</strong> Estad&iacute;stica de transacciones inmobiliarias H1 2025: foreign buyer share 19.3%. <cite>notariado.org</cite></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</article>
+
+<!-- ============ UPDATES ============ -->
+<section class="courtyard">
+  <div class="wrap courtyard__grid">
+    <div>
+      <h2 class="d2" data-anim="lines">Notes from the site<span class="num">.</span></h2>
+      <p class="lede courtyard__p" data-anim>Occasional writing about the buildings we are working on, the M&aacute;laga market, and how renovation actually goes as opposed to how it was planned.</p>
+      <a class="tlink courtyard__link" href="/" data-anim><span>Read the journal</span><span aria-hidden="true">&rarr;</span></a>
+    </div>
+
+    <div class="signup" id="updates" data-anim>
+      <p class="tag">Company updates</p>
+      <h3 class="d4 signup__t">Take a seat at the courtyard<span class="num">.</span></h3>
+      <p class="note signup__p">Occasional notes from Fundaro, what we are building, where, and what we have learned doing it. A few times a year at most.</p>
+
+      <form class="signup__form" action="#" method="post">
+        <label class="tag" for="email">Email address</label>
+        <div class="signup__row">
+          <input id="email" name="email" type="email" required placeholder="name@example.com" autocomplete="email">
+          <button class="btn btn--dark" type="submit">Keep me updated <span aria-hidden="true">&rarr;</span></button>
+        </div>
+      </form>
+
+      <p class="signup__small">By subscribing you agree to receive occasional updates from Fundaro. Unsubscribe at any time. We do not share your address with anyone.</p>
+
+      <div class="signup__done" role="status" aria-live="polite" hidden>
+        <p class="tag">Confirmation sent &middot; Check your inbox</p>
+        <p class="signup__thanks">Thank you. You will hear from us occasionally, and not often.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div>
+        <div class="footer__logo"><img src="../../assets/logo-dark.svg" alt="Fundaro"></div>
+        <p class="footer__line">The courtyard where capital meets real estate<span class="num">.</span></p>
+        <p class="footer__sub">Residential real estate in M&aacute;laga and southern Spain. SIA &ldquo;Fundaro&rdquo;, Riga and M&aacute;laga.</p>
+      </div>
+
+      <div class="footer__cols">
+        <div>
+          <p class="tag">Company</p>
+          <ul>
+            <li><a href="/#services">What we do</a></li>
+            <li><a href="/#featured">Where we work</a></li>
+            <li><a href="/#our-impact">The company</a></li>
+            <li><a href="/#team">Team</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="tag">More</p>
+          <ul>
+            <li><a href="/">Journal</a></li>
+            <li><a href="#updates">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="tag">Legal</p>
+          <ul>
+            <li><a href="/">Legal notice</a></li>
+            <li><a href="/">Privacy Policy</a></li>
+            <li><a href="/">Cookie Policy</a></li>
+            <li><a href="/">Website terms of use</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <p class="footer__disclaimer">SIA &ldquo;Fundaro&rdquo;, registration number 40203749200, VAT number LV40203749200, LEI 875500YJH4Y0XCESGA65, Ranka dambis 30-130, Riga, LV-1048, Latvia. This website is for general information about the company and its activities. It is not an offer, invitation or inducement to acquire any financial instrument, and nothing on it should be read as financial, investment, tax or legal advice.</p>
+
+    <div class="footer__bot">
+      <p>&copy; 2026 SIA &ldquo;Fundaro&rdquo;. All rights reserved.</p>
+      <p>Riga, Latvia &middot; M&aacute;laga, Spain</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------------------------------------------------------------
+   In-page navigation. Anchor links glide to their section instead of
+   jumping. Links to another page keep their normal behaviour.
+   --------------------------------------------------------------- */
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var frame = 0;
+  var running = false;
+
+  function ease(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  function stop() {
+    running = false;
+    if (frame) cancelAnimationFrame(frame);
+    frame = 0;
+  }
+
+  ['wheel', 'touchstart', 'keydown'].forEach(function (evt) {
+    window.addEventListener(evt, function () { if (running) stop(); }, { passive: true });
+  });
+
+  function positionOf(el) {
+    var margin = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+    var top = el.getBoundingClientRect().top + window.pageYOffset - margin;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    return Math.max(0, Math.min(Math.round(top), Math.round(max)));
+  }
+
+  function glide(to, then) {
+    var from = window.pageYOffset;
+    var delta = to - from;
+    if (!delta) { then(); return; }
+    var duration = Math.min(1300, Math.max(550, Math.abs(delta) * 0.45));
+    var start = performance.now();
+    running = true;
+    frame = requestAnimationFrame(function step(now) {
+      if (!running) return;
+      var p = Math.min(1, (now - start) / duration);
+      window.scrollTo(0, from + delta * ease(p));
+      if (p < 1) { frame = requestAnimationFrame(step); }
+      else { stop(); then(); }
+    });
+  }
+
+  function land(el, href) {
+    if (history.replaceState) history.replaceState(null, '', href);
+    if (!el) return;
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+    el.focus({ preventScroll: true });
+  }
+
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var link = e.target.closest && e.target.closest('a[href]');
+    if (!link) return;
+
+    var href = link.getAttribute('href');
+    if (!href || href.charAt(0) !== '#') return;
+
+    var id = href.slice(1);
+    var el = id ? document.getElementById(id) : null;
+    if (id && !el) return;
+
+    e.preventDefault();
+    stop();
+    var to = el ? positionOf(el) : 0;
+    if (reduce.matches) { window.scrollTo(0, to); land(el, href); return; }
+    glide(to, function () { land(el, href); });
+  });
+})();
+</script>
+
+<script>
+/* ---------------------------------------------------------------
+   Motion. One observer drives every entry animation on the page:
+   an element is revealed the first time it reaches the viewport and
+   is then dropped, so nothing runs on a second pass.
+   --------------------------------------------------------------- */
+(function () {
+  var root = document.documentElement;
+  if (!root.classList.contains('js')) return;
+
+  try {
+    document.querySelectorAll('[data-anim="lines"]').forEach(function (el) {
+      el.innerHTML = el.innerHTML.split(/<br\s*\/?>/i).map(function (line, i) {
+        return '<span class="ln" style="--i:' + i + '"><span>' + line + '</span></span>';
+      /* joined on a space: the <br> is gone once the lines are wrapped, and
+         without it the extracted text reads "real estatein southern" */
+      }).join(' ');
+    });
+
+    document.querySelectorAll('[data-stagger]').forEach(function (group) {
+      Array.prototype.forEach.call(group.children, function (child, i) {
+        child.style.setProperty('--i', i);
+      });
+    });
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -10% 0px' });
+
+    document.querySelectorAll('[data-anim]').forEach(function (el) { io.observe(el); });
+
+    /* the masthead is already on screen: play it on load, not on scroll */
+    requestAnimationFrame(function () {
+      document.querySelectorAll('.masthead [data-anim]').forEach(function (el) {
+        io.unobserve(el);
+        el.classList.add('is-in');
+      });
+    });
+  } catch (err) {
+    root.classList.remove('js');
+  }
+})();
+</script>
+
+<script>
+/* ---------------------------------------------------------------
+   Signup success state. The form has no endpoint yet, so this only
+   swaps the card to its confirmation copy; wire the POST to a real
+   list before launch and move this into its success handler.
+   --------------------------------------------------------------- */
+(function () {
+  document.querySelectorAll('.signup__form').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      /* let the browser say what is wrong with the address */
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      var card = form.closest('.signup');
+      var done = card && card.querySelector('.signup__done');
+      if (!done) return;
+
+      done.hidden = false;
+      void done.offsetWidth;          /* let the hidden state paint once, so it can transition */
+      card.classList.add('is-done');
+      done.setAttribute('tabindex', '-1');
+      done.focus({ preventScroll: true });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

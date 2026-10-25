@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head><script data-fndr="static-host">
+(function(){
+  window.FD_API_BASE="https://fndr.8nomads.com";window.FD_VIDEO_BASE="https://fndr.8nomads.com/v2/assets";window.FD_SITE_BASE="";
+  // Framer CMS byte ranges on a plain file host: fetch the whole file once, hand back the slices asked for
+  var f=window.fetch,cache={};
+  window.fetch=function(u,o){
+    try{
+      var url=new URL(typeof u==="string"?u:u.url,location.href),ranges=url.searchParams.get("range");
+      if(ranges&&/\.framercms$/.test(url.pathname)){
+        var key=url.origin+url.pathname;
+        var p=cache[key]||(cache[key]=f(key).then(function(r){if(!r.ok)throw new Error("cms "+r.status);return r.arrayBuffer()}));
+        return p.then(function(buf){
+          var b=new Uint8Array(buf),parts=[],n=0;
+          ranges.split(",").forEach(function(r){var m=/^(\d+)-(\d+)$/.exec(r);if(!m)throw new Error("bad range");var s=b.subarray(+m[1],+m[2]+1);parts.push(s);n+=s.length});
+          var out=new Uint8Array(n),off=0;parts.forEach(function(s){out.set(s,off);off+=s.length});
+          return new Response(out,{status:200,headers:{"content-type":"application/octet-stream"}})
+        })
+      }
+    }catch(e){}
+    return f.apply(this,arguments)
+  };
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<!-- Unlisted: reachable by direct link only, never indexed. -->
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="referrer" content="no-referrer">
+
+<title>SIA Fundaro - Interim Financial Statements</title>
+
+<style>
+  /* No page design: the PDF viewer fills the window edge to edge. The
+     background matches the viewer's own canvas so there is no visible seam. */
+  html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #525659; }
+  object { display: block; width: 100%; height: 100%; border: 0; }
+
+  /* Shown only where an inline PDF viewer is unavailable (most mobile
+     browsers), so the document is still one tap away. */
+  .open-pdf {
+    display: none;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    font: 16px/1.5 system-ui, sans-serif;
+  }
+  .open-pdf a { color: #fff; }
+  @media (max-width: 700px) {
+    object { display: none; }
+    .open-pdf { display: flex; }
+  }
+</style>
+</head>
+<body>
+
+<object
+  data="9bd15589c9ef010d52.pdf#view=FitH"
+  type="application/pdf">
+  <!-- Fallback for desktop browsers without a built-in PDF plugin. -->
+  <div class="open-pdf" style="display:flex">
+    <a href="9bd15589c9ef010d52.pdf">Open the PDF</a>
+  </div>
+</object>
+
+<div class="open-pdf">
+  <a href="9bd15589c9ef010d52.pdf">Open the PDF</a>
+</div>
+
+</body>
+</html>
