@@ -25,7 +25,6 @@
 
   // window.FD_API_BASE is set by the static build when the API lives on another host
   var API = (window.FD_API_BASE || "") + "/api/early-access", POLL_MS = 4000, CAP = 500, SIZE = 500;
-  var TICKET_DEADLINE = Date.parse("2026-10-24T21:00:00Z"); // ticket block countdown (unchanged)
   var KEY = "fd-ea-place";
   // Which waitlist block shows: v3 (keys and the lit facade, public/waitlist/) is the live one.
   // ?wl=v2 or ?wl=v4 previews the other versions; ?wl=v1 shows the earlier dark block built in this file.
@@ -156,7 +155,6 @@
         'to the bond registration platform, where you can subscribe to the bonds and read the full project information. Enter your email and the place is yours.</p>' +
         form("Reserve my number", "ticket", KEY_NOTE) +
         '<div class="fd-ea__rule"></div>' +
-        '<div class="fd-ea__when"><span class="fd-ea__eyebrow">Access links go out in</span><span class="fd-ea__clock" role="timer" data-t="line">00d 00h 00m 00s</span></div>' +
         APPROVED +
       '</div>' +
     '</div>' +
@@ -247,7 +245,6 @@
         var c = target === null ? null : parts(target);
         ["d", "h", "m", "s"].forEach(function (k) { q(k).textContent = c ? pad(c[k]) : "--"; });
       }
-      if (q("line")) { var t = parts(TICKET_DEADLINE); q("line").textContent = pad(t.d) + "d " + pad(t.h) + "h " + pad(t.m) + "m " + pad(t.s) + "s"; }
     });
   }
 

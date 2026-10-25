@@ -124,9 +124,7 @@
 .fd-ea--ticket .fd-ea__input:focus-visible { box-shadow: 0 0 0 3px rgba(254, 238, 0, .9); }
 .fd-ea--ticket .fd-ea__btn { height: 56px; min-width: 224px; }
 .fd-ea--ticket .fd-ea__rule { height: 1px; margin-top: 28px; background: rgba(39, 23, 50, .12); max-width: 582px; }
-.fd-ea--ticket .fd-ea__when { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; margin-top: 30px; }
-.fd-ea__clock { font-family: var(--ea-display); font-size: 29px; line-height: 1; white-space: nowrap; }
-.fd-ea--ticket .fd-ea__approved { justify-content: flex-end; gap: 16px; margin-top: 10px; max-width: 582px; }
+.fd-ea--ticket .fd-ea__approved { justify-content: flex-end; gap: 16px; margin-top: 26px; max-width: 582px; }
 .fd-ea--ticket .fd-ea__approved .fd-ea__eyebrow { font-size: 10.5px; }
 .fd-ea--ticket .fd-ea__lb { width: 124px; color: var(--ea-ink); }
 .fd-ea--ticket .fd-ea__note { color: var(--ea-ink); }
@@ -198,8 +196,6 @@
   .fd-ea--ticket .fd-ea__lead { margin-top: 18px; font-size: 16.5px; line-height: 1.62; }
   .fd-ea--ticket .fd-ea__form, .fd-ea--ticket .fd-ea__done { margin-top: 26px; }
   .fd-ea--ticket .fd-ea__btn { min-width: 0; }
-  .fd-ea--ticket .fd-ea__when { gap: 8px 14px; margin-top: 24px; }
-  .fd-ea__clock { font-size: 26px; }
   .fd-ea--ticket .fd-ea__approved { justify-content: flex-start; gap: 14px; margin-top: 18px; }
   .fd-ea--ticket .fd-ea__approved .fd-ea__eyebrow { font-size: 9.5px; letter-spacing: .22em; }
   .fd-ea__facts { flex-direction: column; align-items: center; gap: 8px; margin-top: 34px; font-size: 10.5px; letter-spacing: .22em; text-align: center; }
