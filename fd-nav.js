@@ -116,14 +116,16 @@
       setTimeout(function () { scrollToEl(document.getElementById("early-access")); }, 0);
       return;
     }
-    // a section link inside the open phone menu: close the menu, then glide to the section
-    var menuLink = !btn && !hero && !top && openMenu() && t.closest('nav a[href*="#"]');
+    // a section link in the menu (desktop bar or the open phone menu): glide to the section instead of jumping;
+    // on a phone the menu closes first. Links to a section of another page (journal, legal pages) navigate as usual.
+    var menuLink = !btn && !hero && !top && t.closest('nav a[href*="#"]');
+    var target = menuLink && document.getElementById((menuLink.getAttribute("href").split("#")[1] || "").trim());
+    if (menuLink && (!target || menuLink.pathname !== location.pathname)) menuLink = target = null;
     if (!btn && !hero && !top && !menuLink) return;
     e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
     if (top) { scrollToY(0); return; }
     if (menuLink) {
-      var id = (menuLink.getAttribute("href").split("#")[1] || "").trim();
-      closeMobileMenu(function () { setTimeout(function () { scrollToEl(document.getElementById(id)); }, 40); });
+      closeMobileMenu(function () { setTimeout(function () { scrollToEl(target); }, 40); });
       return;
     }
     var block = document.getElementById(hero && !phone.matches ? "team" : "early-access");
